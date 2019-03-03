@@ -6,16 +6,21 @@
     <title>Admin Client App</title>
   </head>
   <body>
-    <h3 class = "header">New Message</h3>
 
-<div>
+    <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'newMessage')" id = "defaultOpen">New Message</button>
+  <button class="tablinks" onclick="openCity(event, 'oldMessage')">Old Message</button>
+
+</div>
+
+<div id="newMessage"class="tabcontent">
   <form action="">
     <label>Title</label>
     <input type="text"  placeholder="Alert Title">
 
     <label>Type</label>
     <select>
-      <option >Emergenecy</option>
+      <option >Emergency</option>
       <option >Sports</option>
       <option >Other</option>
     </select>
@@ -27,8 +32,37 @@
   </form>
 </div>
 
+<div id="oldMessage" class="tabcontent"> 
+
+<h1> test</h1>
 
 
-    </form>
+
+</div>
+
+
+
+
+
+
   </body>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+<script> 
+document.getElementById("defaultOpen").click();
+</script>
+
 </html>
