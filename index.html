@@ -8,8 +8,8 @@
   <body>
 
     <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'newMessage')" id = "defaultOpen">New Message</button>
-  <button class="tablinks" onclick="openCity(event, 'oldMessage')">Old Message</button>
+  <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id = "defaultOpen">New Message</button>
+  <button class="tablinks" onclick="switchTabs(event, 'oldMessage')">Old Message</button>
 
 </div>
 
@@ -33,11 +33,7 @@
 </div>
 
 <div id="oldMessage" class="tabcontent"> 
-
 <h1> test</h1>
-
-
-
 </div>
 
 
@@ -47,7 +43,7 @@
 
   </body>
 <script>
-function openCity(evt, cityName) {
+function switchTabs(evt, cityName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
