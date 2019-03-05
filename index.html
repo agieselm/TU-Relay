@@ -7,31 +7,44 @@
   </head>
   <body>
 
-    <div class="tab">
+<div class="tab">
   <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id = "defaultOpen">New Message</button>
   <button class="tablinks" onclick="switchTabs(event, 'oldMessage')">Old Message</button>
+  
 
 </div>
 
 <div id="newMessage"class="tabcontent">
+
+
+
   <form action="">
     <label>Title</label>
-    <input type="text"  placeholder="Alert Title">
+    <input type="text"  placeholder="Alert Title" id = "alertTitle">
 
     <label>Type</label>
-    <select>
+    <select id = "selectType">
+      <option>--Select A Type--</option>
       <option >Emergency</option>
       <option >Sports</option>
       <option >Other</option>
     </select>
 
     <label >Alert</label>
-    <input type="text" placeholder="Your alert message">
+    <input type="text" placeholder="Your alert message" id = "alertMessage">
   
     <input type="submit" value="Submit">
   </form>
-</div>
 
+
+        <label>Template</label>
+    <select id = "tempSelect " onChange = "fillTemplate()" >
+      <option>--Select A Template--</option>
+      <option value = "shooterMessage">Shooter</option>
+      <option value = "sportsMessage">Sports</option>
+
+    </select>
+</div>
 <div id="oldMessage" class="tabcontent"> 
 <div class="vertical-menu">
   <a href="#" class="active">Home</a>
@@ -53,30 +66,7 @@
   </div>
 </div>
 
-
-
-
-
-
   </body>
-<script>
-function switchTabs(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-</script>
-
-<script> 
-document.getElementById("defaultOpen").click();
-</script>
+<script src = "adminScripts.js"></script>
 
 </html>
