@@ -29,10 +29,6 @@ input[type=text], select {
     padding: 20px;
   }
 
-
-
-
-
   body {font-family: Arial;}
 
 /* Style the tab */
@@ -70,4 +66,41 @@ input[type=text], select {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+.vertical-menu {
+  height: 300px;
+  overflow-y: auto;
+}
+.vertical-menu a {
+  background-color: rgb(214, 214, 214); /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50; /* Add a green color to the "active/current" link */
+  color: white;
+}
+
+.deleted{
+  overflow: hidden;
+  border: none
+  background-color: #f1f1f1;
+}
+.deleted button{
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
 }
