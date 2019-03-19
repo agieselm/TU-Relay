@@ -69,11 +69,11 @@ input[type=text], select {
 }
 
 .vertical-menu {
-  height: 300px;
+  height: 250px;
   overflow-y: auto;
 }
 .vertical-menu a {
-  background-color: rgb(214, 214, 214); /* Grey background color */
+  background-color: rgb(224, 224, 224); /* Grey background color */
   color: black; /* Black text color */
   display: block; /* Make the links appear below each other */
   padding: 12px; /* Add some padding */
@@ -89,13 +89,14 @@ input[type=text], select {
   color: white;
 }
 
-.deleted{
+.deleted {
   overflow: hidden;
-  border: none
+  border: none;
   background-color: #f1f1f1;
 }
+
 .deleted button{
-  background-color: inherit;
+  background-color:  #e8e8e8;
   float: left;
   border: none;
   outline: none;
