@@ -1,0 +1,14 @@
+{"tempSelect": [   
+    {
+        "id": "1",
+        "alertTitle": "--Select A Template--"
+    },
+    {
+        "id": "2",
+        "alertTitle": "sportsMessage",
+        "templateMessage": "Basketball Game at 7",
+        "templateType": "Sports"
+    }
+
+]}
+

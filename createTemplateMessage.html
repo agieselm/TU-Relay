@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link href="adminClient.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Create a new template</title>
+    
+  </head>
+  <body>
+
+
+<div id="newMessage">
+
+
+
+  <form  id = "MyForm" action="">
+    <label>Title</label>
+    <input type="text"  placeholder="Alert Title" id = "alertTitle">
+
+    <label>Type</label>
+    <input type="text"  placeholder="Alert Type" id = "alertType">
+
+
+
+    <label >Alert</label>
+    <input type="text" placeholder="Your alert message" id = "alertMessage">
+  <div id = "container">
+    <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
+    <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
+  </div
+  </form>
+
+</div>
+
+
+  </body>
+  <script src = "adminScripts.js"></script>
+
+
+
+</html>

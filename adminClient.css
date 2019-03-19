@@ -7,8 +7,20 @@ input[type=text], select {
     border-radius: 4px;
     box-sizing: border-box;
   }
+   #selectType2{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
   
-  input[type=submit] {
+  input::-webkit-calendar-picker-indicator {
+    opacity: 100;
+ }
+  #sendAlertButton, input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -22,6 +34,28 @@ input[type=text], select {
   input[type=submit]:hover {
     background-color: #45a049;
   }
+  #templateCancel, input[type=reset] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #templateSave, [type=Button] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=reset]:hover {
+    background-color: #45a049;
+  }
   
   div {
     border-radius: 5px;
@@ -29,7 +63,9 @@ input[type=text], select {
     padding: 20px;
   }
 
-
+  #container{
+    text-align: center;
+}
 
 
 
@@ -70,4 +106,9 @@ input[type=text], select {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+#addButton {
+  cursor: pointer;
+  float: right; 
 }
