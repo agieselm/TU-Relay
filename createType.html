@@ -15,14 +15,40 @@
 
 
   <form  id = "MyForm" action="">
-
-    <label>Type</label>
-    <input type="text"  placeholder="Alert Type" id = "alertType">
-
-  <div id = "container">
-    <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
-    <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
-  </div
+              <label>Choose Type To Edit</label>
+        
+              <select>
+                <option >Emergency</option>
+                <option >Sports</option>
+                <option >Other</option>
+              </select>
+              <label>Name</label>
+              <input type="text"  placeholder="example: Maintenence, Emergency, Basketball, etc.">
+          
+              <label>Priority</label>
+              <select>
+                <option >1 - Highest </option>
+                <option >2</option>
+                <option >3</option>
+                <option>4 - Lowest</option>
+              </select>
+        
+              <label>Color</label>
+              <select>
+                <option >Red</option>
+                <option >Orange</option>
+                <option >Yellow</option>
+                <option>Green</option>
+                <option>Blue</option>
+                <option>Purple</option>
+                <option>Black</option>
+                <option>White</option>
+              </select>
+          
+              <div id = "container">
+                <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
+                <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
+              </div>
   
   </form>
 
