@@ -114,6 +114,11 @@ input[type=text], select {
 
 }
 
+#addButton {
+  cursor: pointer;
+  float: right; 
+}
+
 #imgUpload{
  align-content: center;
 }
