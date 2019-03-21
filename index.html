@@ -40,9 +40,18 @@
 
 <!-- Message textbox -->
     <label >Content</label>
-    <input type="text" placeholder="Your alert message" id = "alertMessage">
+    <input type="text" placeholder="Your alert message" id = "alertMessage" >
+    <form action="localhost" method="post" enctype="multipart/form-data" >
+      <label> Upload an Image </input><br>
+      <input id="imgUpload"type="file" name="avatar" accept=".jpg, .jpeg, .png, .pdf, .img"/>
+    </form>
+
+
   
     <input type="submit" value="Submit" onclick= "sendConfirm()" id= "sendAlertButton">
+
+
+    
   </form>
 </div>
 

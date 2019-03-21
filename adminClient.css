@@ -149,3 +149,15 @@ input[type=text], select {
   transition: 0.3s;
   font-size: 17px;
 }
+
+
+#alertMessage{
+  float: left;
+  height: 200px;
+  width: 60%;
+
+}
+
+#imgUpload{
+ align-content: center;
+}
