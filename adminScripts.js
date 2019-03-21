@@ -24,33 +24,33 @@ function switchTabs(evt, tabs) {
    
   
   
-  // function fillTemplate() {
+  function fillTemplate() {
   
-  // let alertTemplate = event.target.value;
+  let alertTemplate = event.target.value;
   
-  //       switch (alertTemplate) {
-  //         case '':  {
-  //           templateMessage.value = "";
-  //           templateTitle.value = "";
-  //           templateType.value = "";
-  //           break;
-  //         }
-  //         case 'shooterMessage':  {
-  //           templateMessage.value = "Shooter on campus";
-  //           templateTitle.value = "Shooter";
-  //           templateType.value = "Emergency";
-  //           break;
-  //         }
-  //         case 'sportsMessage': {
-  //           templateMessage.value = "Basketball Game at 7";
-  //           templateTitle.value = "Sports Event";
-  //           templateType.value = "Sports";
-  //           break;
+        switch (alertTemplate) {
+          case '':  {
+            templateMessage.value = "";
+            templateTitle.value = "";
+            templateType.value = "";
+            break;
+          }
+          case 'shooterMessage':  {
+            templateMessage.value = "Shooter on campus";
+            templateTitle.value = "Shooter";
+            templateType.value = "Emergency";
+            break;
+          }
+          case 'sportsMessage': {
+            templateMessage.value = "Basketball Game at 7";
+            templateTitle.value = "Sports Event";
+            templateType.value = "Sports";
+            break;
   
-  // }
+  }
   
-  //       }
-  // }
+        }
+  }
 
   function popupTemplateAdd() {
     const remote = require('electron').remote;
@@ -67,7 +67,7 @@ function switchTabs(evt, tabs) {
     const BrowserWindow = remote.BrowserWindow;
     var win = new BrowserWindow({ 
       width: 700, 
-      height: 232,
+      height: 380,
       frame: false });
     win.setMenuBarVisibility(false);
     win.loadFile('createType.html');
