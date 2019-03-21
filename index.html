@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "UTF-8">
+      <title>TU-Relay</title>
+   </head>
+   <body>
+      <button type = "button" id = "notify" name = "notifybutton">
+         Click here to trigger a campus accident notification!
+      </button>
+
+      <script type = "text/javascript">
+         const notifier = require('node-notifier')
+         const path = require('path');
+         
+         document.getElementById('notify').onclick = (event) => {
+
+            notifier.notify(
+             {
+               title: 'SAFETY ALERT: Major Accident on Campus',
+               message: 'At approximately [time] today a major accident occurred at [location]. The area is being evacuated and a thorough investigation is being conducted. Please avoid that area until further notice. For more details and timely updates, [information].',
+               icon: path.join(__dirname,'trinity_tiger.png'),  // Absolute path (doesn't work on balloons)
+               contentImage: null,
+               sound: true,  // Only Notification Center or Windows Toasters
+               wait: true,   // Wait with callback, until user action is taken against notification
+               timeout: 60 //disabled as of last update?
+             }, 
+             
+            function(error, response, metadata) {
+                console.log(response, metadata);
+
+             });
+
+            notifier.on('click', function (notifierObject, options) {
+                window.open(`file://${__dirname}/notification.html`)
+                console.log("You clicked on the notification");
+             });
+            notifier.on('timeout', function (notifierObject, options) {
+                console.log("Notification timed out!");
+             });
+         }
+     </script>
+<br>
+     <button type = "button" id = "anotify" name = "notifybutton">
+        Click here to trigger a campus assault notification!
+     </button>
+
+     <script type = "text/javascript">
+        document.getElementById('anotify').onclick = (event) => {
+
+           notifier.notify(
+            {
+              title: 'CRIME ALERT: Assault',
+              message: 'At approximately [time] today TUPD received a report of an assault occuring on campus at [location]. A thorough investigation is being conducted. Updates will be provided as additional information becomes available. At this time, the campus community is asked to remain vigilant and take extra personal security precautions, such as avoiding dimlit areas, walking alone, and being aware of suspicious persons. Please report any suspicious persons or activities to TUPD at 210-999-7070. The University is grateful for your patience, cooperation, and understanding during this incident.',
+              icon: null,
+              contentImage: path.join(__dirname, 'trinity_tiger.png'),
+              sound: true,  // Only Notification Center or Windows Toasters
+              wait: true,   // Wait with callback, until user action is taken against notification
+              timeout: 60 //disabled as of last update?
+            }, 
+            
+           function(error, response, metadata) {
+               console.log(response, metadata);
+            });
+        }
+    </script>
+<br>
+     <button type = "button" id = "alert" name = "alertButton">
+         Click here to trigger an active shooter alert!
+     </button>
+
+     <script type = "text/javascript">
+        //Since dialog module is only available to main process you can not directly include the dialog module in a renderer process.
+        //To display a confirmation box from the renderer process you need to use remote module.
+         const { remote } = require('electron');
+         const dialog = remote.dialog;
+
+         document.getElementById('alert').addEventListener('click', (e) => {
+            
+         const options = {
+            type: 'info',
+            buttons: ['Close'],
+            title: 'EMERGENCY ALERT: Armed Instruder Reported on Campus', //only displays on some platforms
+            message: 'At approximately [time] today TUPD received a report of a possible armed intruder on campus at [location]. The entire campus community should immediately shelter in place. Stay where you are until further notice. Police are responding to the situation. Remain calm and follow instructions. University officials will send updates as soon as additional information is available. Classes have temporarily been suspended until further notice.',
+            icon: path.join(__dirname,'trinity_tiger.png')
+            //detail: additional message info if desired
+            };
+
+        dialog.showMessageBox(null, options, (response) => {
+         console.log(response);
+        });
+        });
+     </script>
+<br>
+    <button type = "button" id = "balert" name = "alertButton">
+        Click here to trigger a bomb threat alert!
+    </button>
+
+    <script type = "text/javascript">
+        document.getElementById('balert').addEventListener('click', (e) => {
+           
+        const options = {
+           type: 'info',
+           buttons: ['Close'],
+           title: 'EMERGENCY ALERT: Building Evacuation', //only displays on some platforms
+           message: 'At approximately [time] today TUPD received a report of a possible dangerous situation in [location]. The area is being evacuated and a thorough investigation is being conducted. Please avoid that area until further notice. The University appreciates your patience, cooperation, and understanding during this incident.',
+           icon: path.join(__dirname,'trinity_tiger.png')
+           //detail: additional message info if desired
+           };
+
+       dialog.showMessageBox(null, options, (response) => {
+        console.log(response);
+       });
+       });
+    </script>
+   </body>
+</html>

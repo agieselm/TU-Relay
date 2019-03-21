@@ -1,0 +1,23 @@
+{
+  "name": "tu-relay",
+  "version": "1.0.0",
+  "description": "UI-Client for TU-Relay",
+  "main": "index.js",
+  "scripts": {
+    "electron": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbeyt/TU-Relay.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bbeyt/TU-Relay/issues"
+  },
+  "homepage": "https://github.com/bbeyt/TU-Relay#readme",
+  "dependencies": {
+    "electron": "^4.1.1",
+    "node-notifier": "^5.4.0"
+  }
+}
