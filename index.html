@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="adminClient.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <title>Admin Client App</title>
@@ -25,7 +25,7 @@
   <option>--Select A Type--</option>
   <option >Shooter</option>
   <option >Sports Event</option>
-  <form action="" >
+  <form name="sendNewMessage" action="" method="POST">
   </select>
     <label>Title</label>
     <input type="text"  placeholder="Alert Title">
@@ -51,7 +51,7 @@
 
 
   
-    <input type="button" value="Submit" onclick ="sendConfirm(this.form)" id= "sendAlertButton">
+    <input type="submit" value="Submit" id= "sendAlertButton">
 
 
     

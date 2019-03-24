@@ -90,11 +90,12 @@ function switchTabs(evt, tabs) {
       return true;
     }
   }
-  function sendConfirm(form){
+  function sendConfirm(){
     if(confirm("are you sure you want to send?")){
-      form.submit();
+      let t = document.getElementByName("sendNewMessage")
+      t.submit();
     }
-    }
+  }
   
 
 
@@ -108,15 +109,21 @@ function switchTabs(evt, tabs) {
       });
   }
 
-  function postNewMessage() {
-    axios.post('', data, config)
-      .then(res => {
-        console.log(res.data.login);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+//   function postNewMessage() {
+//     $(document).ready(function(){
+//       // click on button submit
+//       $("#submit").on('click', function(){
+//           // send ajax
+//           $.ajax({
+//               url: 'URL', // url where to submit the request
+//               type : "POST", // type of action POST || GET
+//               dataType : 'json', // data type
+//               data : $("#form").serialize(), // post data || get data
+//           })
+//       });
+//   });
+//     //URL
+// }
   
   
   
