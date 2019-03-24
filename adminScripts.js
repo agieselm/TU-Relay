@@ -57,7 +57,7 @@ function switchTabs(evt, tabs) {
     const BrowserWindow = remote.BrowserWindow;
     var win = new BrowserWindow({ 
       width: 700, 
-      height: 435,
+      height: 525,
       frame: false });
     win.setMenuBarVisibility(false);
     win.loadFile('createTemplateMessage.html');
@@ -92,9 +92,16 @@ function switchTabs(evt, tabs) {
   }
   function sendConfirm(){
     if(confirm("are you sure you want to send?")){
-      document.getElementById("sendNewMessage").submit();
+      document.getElementById("sendNewMessage").submit()
+      document.getElementById("sendNewMessage").reset()
     }
   }
+  function sendTemplateConfirm(){
+  if(confirm("are you sure you want to send?")){
+    document.getElementById("sendNewTemplate").submit()
+    document.getElementById("sendNewTemplate").reset()
+  }
+}
   
 
 

@@ -26,32 +26,30 @@
   <option >Shooter</option>
   <option >Sports Event</option>
   </select>
-  <form id="sendNewMessage" action="" method="POST">
+  <form id="sendNewMessage" action="/send_message" method="post">
     <label>Title</label>
-    <input type="text"  placeholder="Alert Title">
+    <input type="text" name="Title" placeholder="Alert Title">
 
 <!-- add type button-->
     <label>Type</label>
-    <button id = "addButton" onclick="popupTypeAdd()">+</button> 
+    <button id ="addButton" onclick="popupTypeAdd()">+</button> 
 <!-- Drop down for types -->
-    <select id = "selectType">
-      <option>--Select A Type--</option>
-      <option >Emergency</option>
-      <option >Sports</option>
-      <option >Other</option>
+    <select id ="selectType" name ="MessageTypeID">
+      <option value = 0>--Select A Type--</option>
+      <option value = 1>Emergency</option>
+      <option value = 3>Sports</option>
+      <option value = 4>Other</option>
     </select>
 
 <!-- Message textbox -->
     <label >Content</label>
-    <input type="text" placeholder="Your alert message" id = "alertMessage" >
+    <input type="text" placeholder="Your alert message" id ="alertMessage" name ="Content" >
     <form action="" method="post" enctype="multipart/form-data" >
       <label> Upload an Image </input><br>
       <input id="imgUpload"type="file" name="avatar" accept=".jpg, .jpeg, .png, .pdf, .img"/>
     </form>
-
-
   
-    <input type="button" value="Submit" id= "sendAlertButton" onclick= "sendConfirm()">
+    <input type="button" value="Submit" id="sendAlertButton" onclick="sendConfirm()">
 
 
     
