@@ -137,7 +137,7 @@ app.post('/make_type', upload.none(), function (req, res) {
     res.status(204).send();
 })
 
-/* app.post('/edit_type', upload.none(), function (req, res) {
+app.post('/edit_type', upload.none(), function (req, res) {
     //TODO: Edit type using provided info
     let messagetype = {
         Name: req.body.Name,
@@ -151,7 +151,7 @@ app.post('/make_type', upload.none(), function (req, res) {
 
     res.status(204).send();
 })
- */
+
 app.delete('/delete_types', upload.none(), function (req, res) {
     //Delete the specified types from the database.
     for (let id in req.body.messagetypes) {
@@ -203,7 +203,32 @@ app.post('/make_template', upload.single("blob"), function (req, res) {
 })
 
 app.post('/edit_template', upload.single("blob"), function (req, res) {
-    //TODO: Edit template using provided info.
+    //Edit template using provided info.
+    let messagetemplate = {
+        Name: req.body.Name,
+        Title: req.body.Title,
+        Content: req.body.Content,
+        MessageTypeID: req.body.MessageTypeID,
+        UserID: req.body.UserID
+    }
+
+    if (req.file) {
+        fs.readFile(req.file.path, function (err, data) {
+            if (err) throw err;
+            messagetemplate.Image = data;
+
+            connection.query('UPDATE messagetemplate SET ? WHERE ID = ?', [messagetemplate, req.body.ID], function (err, rows, fields) {
+                if (err) throw err;
+            });
+            res.status(204).send();
+        });
+    } else {
+        connection.query('UPDATE messagetemplate SET ? WHERE ID = ?', [messagetemplate, req.body.ID], function (err, rows, fields) {
+            if (err) throw err;
+        });
+    
+        res.status(204).send();
+    }
 })
 
 app.delete('/delete_templates', upload.none(), function (req, res) {
