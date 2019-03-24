@@ -8,6 +8,9 @@
    <body>
     <script>
       const remote = require('electron').remote;
+      require ('electron').ipcRenderer.on('message:sendTitle', (event, message) => {
+        console.log(message);
+      })
 
         function closeCurrentWindow() {
             var window = remote.getCurrentWindow();
