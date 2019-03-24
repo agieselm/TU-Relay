@@ -72,6 +72,16 @@ function switchTabs(evt, tabs) {
     win.setMenuBarVisibility(false);
     win.loadFile('createType.html');
   }
+  function popupDeleted() {
+    const remote = require('electron').remote;
+    const BrowserWindow = remote.BrowserWindow;
+    var win = new BrowserWindow({ 
+      width: 700, 
+      height: 380,
+      frame: false });
+    win.setMenuBarVisibility(false);
+    win.loadFile('deletedMessages.html');
+  }
 
   function cancelConfirm(){
     let x = confirm("are you sure you want to cancel?")
@@ -87,4 +97,26 @@ function switchTabs(evt, tabs) {
     }
   
 
+
+  function getMessages() {
+    axios.get('')
+      .then(res => {
+        console.log(res.data.login);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  function postNewMessage() {
+    axios.post('', data, config)
+      .then(res => {
+        console.log(res.data.login);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  
+  
   
