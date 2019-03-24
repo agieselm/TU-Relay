@@ -92,8 +92,7 @@ function switchTabs(evt, tabs) {
   }
   function sendConfirm(){
     if(confirm("are you sure you want to send?")){
-      let t = document.getElementByName("sendNewMessage")
-      t.submit();
+      document.getElementById("sendNewMessage").submit();
     }
   }
   
