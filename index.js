@@ -1,15 +1,36 @@
-const electron = require('electron');
+const electron = require('electron')
+const { app, BrowserWindow } = electron
+const axios = require('axios')
+const posturl = require('./notanIP')
 
-const { app, BrowserWindow, dialog } = electron;
-const url = require('url');
-const path = require('path');
+let win
 
-let mainWindow;
-
-function createWindow() {
-    mainWindow = new BrowserWindow({width: 800, height: 200});
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+function getMessageFromServer() {
+  axios.post(posturl.url)
+  .then(res => {
+    const messageData = res.data;
+    console.log(messageData);
+    console.log(messageData[0].Title);
+    console.log(messageData[0].Content);
+  })
+  .catch(err => {
+    console.log(err);
+  });
 }
 
-app.on('ready', createWindow);
+getMessageFromServer();
 
+app.on('ready', () => {
+  const { x, y } = electron.screen.getPrimaryDisplay().workAreaSize
+  win = new BrowserWindow (
+    {x: 1200,
+     y: 0,
+     width: 518,
+     height: 228,
+     transparent: true,
+     frame: false,
+    });
+  console.log(win.getBounds());
+  //win.loadURL(`file://${__dirname}/notification.html`)
+  win.loadURL(`file://${__dirname}/messageRed.html`)
+});
