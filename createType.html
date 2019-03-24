@@ -18,6 +18,7 @@
    <label>Choose Type To Edit</label>
         
    <select>
+     <option>--Choose Type--</option>
      <option >Emergency</option>
      <option >Sports</option>
      <option >Other</option>
@@ -27,6 +28,7 @@
           
    <label>Priority</label>
    <select>
+     <option>--Select a Priority--</option>
      <option >1 - Highest </option>
      <option >2</option>
      <option >3</option>
@@ -34,8 +36,8 @@
    </select>
           
    <div id = "container">
-     <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
-     <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
+     <input type="button" value="Save" onclick= "sendConfirm(this.form)" id ="templateSave">
+     <input type="button" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
    </div>
   
   </form>

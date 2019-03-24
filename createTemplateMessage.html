@@ -16,18 +16,18 @@
 
   <form  id = "MyForm" action="">
     <label>Title</label>
-    <input type="text"  placeholder="Alert Title" id = "alertTitle">
+    <input type="text"  placeholder="Alert Title" id = "alertTitle" required>
 
     <label>Type</label>
-    <input type="text"  placeholder="Alert Type" id = "alertType">
+    <input type="text"  placeholder="Alert Type" id = "alertType" required>
 
 
 
     <label >Alert</label>
-    <input type="text" placeholder="Your alert message" id = "alertMessage">
+    <input type="text" placeholder="Your alert message" id = "alertMessage2" required>
   <div id = "container">
-    <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
-    <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
+    <input type="button" value="Save" onclick= "sendConfirm(this.form)" id ="templateSave">
+    <input type="button" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
   </div>
   </form>
 

@@ -57,7 +57,7 @@ function switchTabs(evt, tabs) {
     const BrowserWindow = remote.BrowserWindow;
     var win = new BrowserWindow({ 
       width: 700, 
-      height: 385,
+      height: 435,
       frame: false });
     win.setMenuBarVisibility(false);
     win.loadFile('createTemplateMessage.html');
@@ -67,7 +67,7 @@ function switchTabs(evt, tabs) {
     const BrowserWindow = remote.BrowserWindow;
     var win = new BrowserWindow({ 
       width: 700, 
-      height: 380,
+      height: 450,
       frame: false });
     win.setMenuBarVisibility(false);
     win.loadFile('createType.html');
@@ -78,17 +78,13 @@ function switchTabs(evt, tabs) {
     if(x == true){
       window.close();
       return true;
-    }else{
-      return false;
     }
   }
-  function sendConfirm(){
-    let x = confirm("are you sure you want to send?")
-    if(x == true){
-      return true;
-    }else{
-      return false;
+  function sendConfirm(form){
+    if(confirm("are you sure you want to send?")){
+      form.submit();
     }
-  }
+    }
+  
 
   
