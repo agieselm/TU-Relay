@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="adminClient.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <title>Deleted Messages</title>
+  </head>
+  <body>
+
+
+<div id="newMessage">
+  <form  id = "MyForm" action="">
+        <label>Deleted Messages</label>
+        <div class="vertical-menu">
+          <a href="#" class="active">Home</a>
+          <a href="#">Message 1 <input type="checkbox" name="message" value="Message"  /><br /></a>
+          <a href="#">Message 2 <input type="checkbox" name="message" value="Message"  /><br /></a>
+          <a href="#">Message 3 <input type="checkbox" name="message" value="Message"  /><br /></a>
+          <a href="#">Message 4 <input type="checkbox" name="message" value="Message"  /><br /></a>
+         </div>
+        <div id = "container">
+                <input type="button" value="Save" onclick= "sendConfirm()" id ="templateSave">
+                <input type="reset" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
+              </div>
+  </form>
+
+</div>
+
+
+  </body>
+  <script src = "adminScripts.js"></script>
+
+
+
+</html>
