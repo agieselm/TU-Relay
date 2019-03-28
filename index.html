@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+
     <link href="adminClient.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <title>Admin Client App</title>
@@ -24,7 +26,7 @@
   </select>
   <form id="sendNewMessage" action="/send_message" method="post">
     <label>Title</label>
-    <input type="text" name="Title" placeholder="Alert Title">
+    <input id = "Title" type="text" name="Title" placeholder="Alert Title">
 
 <!-- add type button-->
     <label>Type</label>
@@ -39,7 +41,7 @@
 
 <!-- Message textbox -->
     <label >Content</label>
-    <input type="text" placeholder="Your alert message" id ="alertMessage" name ="Content" >
+    <input type="text" placeholder="Your alert message" id ="Content" name ="Content" >
     <form action="" method="post" enctype="multipart/form-data" >
       <label> Upload an Image </input><br>
       <input id="imgUpload"type="file" name="avatar" accept=".jpg, .jpeg, .png, .pdf, .img"/>
@@ -69,7 +71,7 @@
   <a href="#">Message 4</a>
 </div>
 <div class="deleted">
-  <button class="deleted" onclick="popupDeleted()">Deleted Messages</button>
+  <button class="deleted" onclick="popupDeleted()">Deleted Messages</button> 
   </div>
 </div>
 
@@ -79,19 +81,54 @@
 <script src ="adminScripts.js"> 
 </script>
 
+
 <script>
+const axios = require('axios')
 
-var $select = $('#tempSelect');
+function getData(){
+axios.post("/new_messages")
+  .then((res) => {
 
-$.getJSON('data.JSON', function(data){
-  $select.html('');
-
-  for (var i =0; i< data['people'].length; i++){
-    $select.append('option id ="' + data['people'][i][id] + '">' + data['people'][i]['name']+'</option>');
-  }
+    const messageData = res.data
+    console.log(messageData);
 
 
-});
+
+
+  })
+
+}
+
+setInterval(getData,5000);
+
+
+const remote = require('electron').remote;
+
+require('electron').ipcRenderer.on('message:sendData',(event,message)=> {
+  console.log(message);
+  var messageTitleData = message[0].Title;
+  console.log(messageTitleData);
+  var messageContentData = message[0].Content;
+  console.log(messageContentData);
+  var messageTypeData = message[0].MessageTypeID
+  console.log(messageTypeData);
+
+  document.querySelector("#Title").innerHTML = messageTitleData;
+  document.querySelector('#Content').innerHTML = messageContentData;
+  document.querySelector('#MessageTypeID').innerHTML = messageTypeData;
+})
+
+
+//var $select = $('#tempSelect');
+//$.getJSON('data.json', function(data){
+  //$select.html('');
+//  console.log(data);
+  //for (var i =0; i< data['people'].length; i++){
+  //  $select.append('option id ="' + data['people'][i]['id'] + '">' + data['people'][i]['name']+'</option>');
+ // }
+
+
+//});
 
 </script>
 
