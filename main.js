@@ -4,6 +4,7 @@ const { app, BrowserWindow } = require('electron')
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
+
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({ width: 800, height: 700 })
@@ -12,9 +13,6 @@ function createWindow () {
   win.loadFile('index.html')
 
 
-  win.webContents.on('did-finish-load',() =>{
-    win.webContents.send('message:sendData', getData.messageData)
-  })
 
   // Open the DevTools.
   
@@ -29,23 +27,6 @@ function createWindow () {
   })
 }
 
-const axios = require('axios')
-
-function getData(){
-axios.post("/new_messages")
-  .then((res) => {
-
-    const messageData = res.data
-    console.log(messageData);
-
-
-
-
-  })
-
-}
-
-setInterval(getData,5000);
 
 
 // This method will be called when Electron has finished
@@ -69,6 +50,7 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
 
 
 

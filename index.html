@@ -84,21 +84,42 @@
 
 <script>
 
+const axios = require('axios')
+
+function getData(){
+axios.post("http://localhost:8081/new_messages")
+  .then((res) => {
+
+    const messageData = res.data
+    console.log(messageData);
 
 
-require('electron').ipcRenderer.on('message:sendData',(event,message)=> {
-  console.log(message);
-  var messageTitleData = message[1].Title;
+  
+
+ 
+  const messageTitleData = messageData[0].Title;
   console.log(messageTitleData);
-  var messageContentData = message[1].Content;
+  const messageContentData = messageData[0].Content;
   console.log(messageContentData);
-  var messageTypeData = message[1].MessageTypeID
+  const messageTypeData = messageData[0].MessageTypeID
   console.log(messageTypeData);
 
-  document.querySelector("#Title").innerHTML = messageTitleData;
-  document.querySelector('#Content').innerHTML = messageContentData;
-  document.querySelector('#MessageTypeID').innerHTML = messageTypeData;
-})
+
+  document.getElementById("Title").value = messageTitleData;
+  document.getElementById("Content").value = messageContentData;
+  document.getElementById("MessageTypeID").value = messageTypeData;
+
+  //document.querySelector("#Title").innerHTML = messageTitleData;
+  //document.querySelector("#Content").innerHTML = messageContentData;
+  //document.querySelector("#MessageTypeID").innerHTML = messageTypeData;
+  })
+
+
+
+}
+
+setInterval(getData,5000);
+
 
 
 //var $select = $('#tempSelect');
