@@ -102,34 +102,15 @@ function switchTabs(evt, tabs) {
     document.getElementById("sendNewTemplate").reset()
   }
 }
+function sendTypeConfirm(){
+  if(confirm("are you sure you want to send?")){
+    document.getElementById("sendNewType").submit()
+    document.getElementById("sendNewType").reset()
+  }
+}
   
 
 
-  function getMessages() {
-    axios.get('')
-      .then(res => {
-        console.log(res.data.login);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
-//   function postNewMessage() {
-//     $(document).ready(function(){
-//       // click on button submit
-//       $("#submit").on('click', function(){
-//           // send ajax
-//           $.ajax({
-//               url: 'URL', // url where to submit the request
-//               type : "POST", // type of action POST || GET
-//               dataType : 'json', // data type
-//               data : $("#form").serialize(), // post data || get data
-//           })
-//       });
-//   });
-//     //URL
-// }
   
   
   

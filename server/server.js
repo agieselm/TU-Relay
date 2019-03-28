@@ -6,7 +6,7 @@ const dbConfig = require('./databaseConfig.js');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 const upload = multer({ dest: 'tmp/uploads/' })
 

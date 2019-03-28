@@ -14,8 +14,10 @@
 
 
 
-  <form  id = "MyForm" action="/make_type">
+  <form  id = "sendNewType" action="/make_type" method = "post">
    <label>Choose Type To Edit</label>
+
+   <input name="Color" placeholder = "color">
         
    <select>
      <option>--Choose Type--</option>
@@ -29,14 +31,14 @@
    <label>Priority</label>
    <select name ="Priority">
      <option>--Select a Priority--</option>
-     <option >1 - Highest </option>
-     <option >2</option>
-     <option >3</option>
-     <option>4 - Lowest</option>
+     <option value = 0>1 - Highest </option>
+     <option value = 1>2</option>
+     <option value = 2>3</option>
+     <option value = 3 >4 - Lowest</option>
    </select>
           
    <div id = "container">
-     <input type="button" value="Save" onclick= "sendConfirm(this.form)" id ="templateSave">
+     <input type="button" value="Save" onclick= "sendTypeConfirm()" id ="templateSave">
      <input type="button" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
    </div>
   
