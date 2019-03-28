@@ -11,6 +11,11 @@ function createWindow () {
   // and load the index.html of the app.
   win.loadFile('index.html')
 
+
+  win.webContents.on('did-finish-load',() =>{
+    win.webContents.send('message:sendData', getData.messageData)
+  })
+
   // Open the DevTools.
   
   //win.webContents.openDevTools()
@@ -23,6 +28,25 @@ function createWindow () {
     win = null
   })
 }
+
+const axios = require('axios')
+
+function getData(){
+axios.post("/new_messages")
+  .then((res) => {
+
+    const messageData = res.data
+    console.log(messageData);
+
+
+
+
+  })
+
+}
+
+setInterval(getData,5000);
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

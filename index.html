@@ -83,34 +83,16 @@
 
 
 <script>
-const axios = require('axios')
-
-function getData(){
-axios.post("/new_messages")
-  .then((res) => {
-
-    const messageData = res.data
-    console.log(messageData);
 
 
-
-
-  })
-
-}
-
-setInterval(getData,5000);
-
-
-const remote = require('electron').remote;
 
 require('electron').ipcRenderer.on('message:sendData',(event,message)=> {
   console.log(message);
-  var messageTitleData = message[0].Title;
+  var messageTitleData = message[1].Title;
   console.log(messageTitleData);
-  var messageContentData = message[0].Content;
+  var messageContentData = message[1].Content;
   console.log(messageContentData);
-  var messageTypeData = message[0].MessageTypeID
+  var messageTypeData = message[1].MessageTypeID
   console.log(messageTypeData);
 
   document.querySelector("#Title").innerHTML = messageTitleData;
