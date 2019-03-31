@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const mysql = require('mysql');
 const dbConfig = require('./databaseConfig.js');
+const fs = require('fs');
 
 const app = express();
 
@@ -49,8 +50,17 @@ app.post('/new_messages', upload.none(), function (req, res) {
     let start = "0";
     if (req.body.messageid)
         start = req.body.messageid;
-
+    console.log("New messages route was hit");
     connection.query("SELECT * FROM message WHERE DELETED = 'F' AND ID > ?", start, function (err, rows, fields) {
+        if (err) throw err;
+        
+        res.status(200).json(rows);
+    });
+})
+
+app.post('/deleted_messages', upload.none(), function (req, res) {
+    //Access DB and return all messages.
+    connection.query("SELECT * FROM message WHERE Deleted = 'T'", function (err, rows, fields) {
         if (err) throw err;
         
         res.status(200).json(rows);
@@ -65,6 +75,8 @@ app.post('/send_message', upload.single("blob"), function (req, res) {
         MessageTypeID: req.body.MessageTypeID,
         UserID: req.body.UserID
     }
+
+    console.log("Send message route was hit");
 
     if (req.file) {
         fs.readFile(req.file.path, function (err, data) {
