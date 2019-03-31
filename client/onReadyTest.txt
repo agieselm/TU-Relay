@@ -1,0 +1,69 @@
+app.on('ready', () => {
+
+  //function runs on an interval to check server for a new message  
+  function checkServerForNewMessages() {
+    //callback function for http request at localServer
+    axios.post(/*posturl.url*/'http://localhost:8081/new_messages')
+      .then(res => {
+
+        //list of objects (all data in server)
+        var messageData = res.data;
+        console.log(messageData);
+        /*var listOfMessageData = messageData.map(function (elem) {
+          return {
+            id: elem.ID,
+            title: elem.Title,
+            content: elem.Content
+          }
+        });
+        
+        console.log(listOfMessageData);
+        */
+
+        //checks for new message. If the messageID is existing in displayedMessage list, sets its id to -1. 
+        var i;
+        for (i = 0; i < messageData.length; i++) {
+          var j;
+          for (j = 0; j < displayedMessages.length; j++) {
+            if (messageData[i].id == displayedMessages[j]) {
+              messageData[i].id = -1;
+              break;
+            }
+          }
+        }
+
+        for (i = 0; i < messageData.length; i++) {
+          //loads new browser window with message contents of http request
+          if (messageData[i].id >= 0) {
+            //TODO: need to make the browser window size and position responsive
+            win = new BrowserWindow(
+              {
+                x: 1200,
+                y: 0,
+                width: 518,
+                height: 228,
+                transparent: true,
+                frame: false,
+              });
+            //loads browser window at specified URL
+            win.loadURL(`file://${__dirname}/messageRed.html`);
+
+            //add message to list of displayedMessages
+            displayedMessages.push(messageData[i].id);
+            console.log(displayedMessages);
+
+            //callback to send message data to browser window
+            //TODO: send correct object to html page
+            win.webContents.on('did-finish-load', () => {
+              win.webContents.send('message:sendData', messageData[i])
+            })
+          }
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+  //runs above function on a set interval (ms)
+  setInterval(checkServerForNewMessages, 10000);
+});

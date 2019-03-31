@@ -6,7 +6,7 @@ const dbConfig = require('./databaseConfig.js');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 const upload = multer({ dest: 'tmp/uploads/' })
 
@@ -67,7 +67,7 @@ app.post('/send_message', upload.single("blob"), function (req, res) {
     }
 
     if (req.file) {
-        fs.readFile(req.file.path, function (err, data) {
+        /* fs.readFile(req.file.path, function (err, data) {
             if (err) throw err;
             message.Image = data;
 
@@ -75,7 +75,7 @@ app.post('/send_message', upload.single("blob"), function (req, res) {
                 if (err) throw err;
             });
             res.status(204).send();
-        });
+        }); */
     } else {
         connection.query('INSERT INTO message SET ?', message, function (err, rows, fields) {
             if (err) throw err;
@@ -184,7 +184,7 @@ app.post('/make_template', upload.single("blob"), function (req, res) {
     }
 
     if (req.file) {
-        fs.readFile(req.file.path, function (err, data) {
+        /* fs.readFile(req.file.path, function (err, data) {
             if (err) throw err;
             messagetemplate.Image = data;
 
@@ -192,7 +192,7 @@ app.post('/make_template', upload.single("blob"), function (req, res) {
                 if (err) throw err;
             });
             res.status(204).send();
-        });
+        }); */
     } else {
         connection.query('INSERT INTO messagetemplate SET ?', messagetemplate, function (err, rows, fields) {
             if (err) throw err;
@@ -213,7 +213,7 @@ app.post('/edit_template', upload.single("blob"), function (req, res) {
     }
 
     if (req.file) {
-        fs.readFile(req.file.path, function (err, data) {
+        /* fs.readFile(req.file.path, function (err, data) {
             if (err) throw err;
             messagetemplate.Image = data;
 
@@ -221,7 +221,7 @@ app.post('/edit_template', upload.single("blob"), function (req, res) {
                 if (err) throw err;
             });
             res.status(204).send();
-        });
+        }); */
     } else {
         connection.query('UPDATE messagetemplate SET ? WHERE ID = ?', [messagetemplate, req.body.ID], function (err, rows, fields) {
             if (err) throw err;

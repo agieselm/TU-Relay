@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>TU-Relay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="Message Message--red">
+    <div class="Message-icon">
+      <i class="fa fa-times"></i>
+    </div>
+    <div class="Message-body">
+      <p id="messageTitleID"></p>
+      <p id="messageContentID"></p>
+    </div>
+    <button id="close-btn" onclick="closeCurrentWindow()" class="Message-close js-messageClose"><i
+        class="fa fa-times"></i></button>
+  </div>
+  <script> //Receive message data from API and query HTML page to display the server data
+    const remote = require('electron').remote;
+
+    //callback function for render process to receive message data
+    require('electron').ipcRenderer.on('message:sendData', (event, message) => {
+      console.log(message);
+      var messageTitleData = message.Title;
+      console.log("The messageTitleData is: " + messageTitleData);
+      var messageContentData = message.Content;
+      console.log("The messageContentData is: " + messageContentData);
+
+    //queries to modify html content
+      document.querySelector("#messageTitleID").innerHTML = messageTitleData;
+      document.querySelector("#messageContentID").innerHTML = messageContentData;
+    });
+
+    //function to close browser window when the "x" is clicked in the upper right hand corner
+    function closeCurrentWindow() {
+      var window = remote.getCurrentWindow();
+      window.close();
+    };
+  </script>
+</body>
+
+</html>
