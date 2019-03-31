@@ -9,7 +9,7 @@
     <title>Admin Client App</title>
     
   </head>
-  <body>
+  <body onload="getData()">
 
     <div class="tab">
   <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id = "defaultOpen">New Message</button>
@@ -22,9 +22,12 @@
   <label>Template</label>
   <button onclick = "popupTemplateAdd()" id = "addButton"> + </button>
 <!-- Drop down for template-->
-  <select id = "tempSelect" onChange = "fillTemplate()" >
+  <select id = "tempSelect" onChange = "test()" >
+        <option>--Select Template--</option>
+
   </select>
-  <form id="sendNewMessage" action="/send_message" method="post">
+  
+  <form id="sendNewMessage" action="http://localhost:8081/send_message" method="post">
     <label>Title</label>
     <input id = "Title" type="text" name="Title" placeholder="Alert Title">
 
@@ -87,51 +90,49 @@
 const axios = require('axios')
 
 function getData(){
-axios.post("http://localhost:8081/new_messages")
+axios.get("http://localhost:8081/get_templates")
   .then((res) => {
 
     const messageData = res.data
     console.log(messageData);
 
+    var x = document.getElementById("tempSelect");
+    for( let i = 0; i < messageData.length; i++){
+       
+      var option = document.createElement("option");
+      option.innerHTML = messageData[i].Name;
+      option.value = messageData[i].ID
+      console.log(option.value)
 
-  
+      x.options.add(option)
 
- 
-  const messageTitleData = messageData[0].Title;
-  console.log(messageTitleData);
-  const messageContentData = messageData[0].Content;
-  console.log(messageContentData);
-  const messageTypeData = messageData[0].MessageTypeID
-  console.log(messageTypeData);
-
-
-  document.getElementById("Title").value = messageTitleData;
-  document.getElementById("Content").value = messageContentData;
-  document.getElementById("MessageTypeID").value = messageTypeData;
-
-  //document.querySelector("#Title").innerHTML = messageTitleData;
-  //document.querySelector("#Content").innerHTML = messageContentData;
-  //document.querySelector("#MessageTypeID").innerHTML = messageTypeData;
+    }
   })
-
-
-
 }
 
 setInterval(getData,5000);
 
 
+function test(){
+axios.get("http://localhost:8081/get_templates")
+  .then((res) => {
 
-//var $select = $('#tempSelect');
-//$.getJSON('data.json', function(data){
-  //$select.html('');
-//  console.log(data);
-  //for (var i =0; i< data['people'].length; i++){
-  //  $select.append('option id ="' + data['people'][i]['id'] + '">' + data['people'][i]['name']+'</option>');
- // }
+  const messageData = res.data
 
+  var x = document.getElementById("tempSelect");
+    for( let i = 0; i < messageData.length; i++){
 
-//});
+  let messageTitleData = messageData[i].Title;
+  let messageContentData = messageData[i].Content;
+  let messageTypeData = messageData[i].MessageTypeID;
+  
+  document.getElementById("Title").value = messageTitleData;
+  document.getElementById("Content").value = messageContentData;
+  document.getElementById("MessageTypeID").value = messageTypeData;
+    }
+})
+}
+
 
 </script>
 
