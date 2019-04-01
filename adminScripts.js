@@ -90,6 +90,10 @@ function switchTabs(evt, tabs) {
       return true;
     }
   }
+
+  function resetForm(){
+    window.reload();
+  }
   function sendConfirm(){
     if(confirm("are you sure you want to send?")){
       document.getElementById("sendNewMessage").submit()
