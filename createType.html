@@ -50,7 +50,7 @@
 
 <div id="editType" class="tabcontent">
 
-<form action = "http://localhost:8081/edit_type" method ="delete">
+<form id = "edittype" action = "http://localhost:8081/edit_type" method ="post">
     <select id ="MessageTypeID" class ="MessageTypeID" onchange = "fillFormData()">
     <option>--Select Type to Edit--</option>
     </select>
@@ -64,6 +64,7 @@
           
    <label>Priority</label>
    <select class = "Priority" name ="Priority" id = "Priority">
+     <option>--Select a Priority--</option>
      <option value = 0>1 - Highest </option>
      <option value = 1>2</option>
      <option value = 2>3</option>
@@ -72,7 +73,7 @@
 
 
 
-<input type="button" value="Delete" onclick= "sendTypeConfirm()" >
+<input type="button" value="Save" onclick= "editTypeConfirm()" >
 </form>
 
 </div>

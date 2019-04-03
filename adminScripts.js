@@ -27,8 +27,8 @@ function switchTabs(evt, tabs) {
     var win = new BrowserWindow({ 
       width: 700, 
       height: 525,
-      frame: false });
-    win.setMenuBarVisibility(false);
+      frame: true });
+    win.setMenuBarVisibility(true);
     win.loadFile('createTemplateMessage.html');
   }
   function popupTypeAdd() {
@@ -79,6 +79,20 @@ function sendTypeConfirm(){
   if(confirm("are you sure you want to send?")){
     document.getElementById("sendNewType").submit()
     document.getElementById("sendNewType").reset()
+  }
+}
+
+function editTypeConfirm(){
+  if(confirm("are you sure you want to send?")){
+    document.getElementById("edittype").submit()
+    //document.getElementById("edittype").reset()
+  }
+}
+
+function editTemplateConfirm(){
+  if(confirm("are you sure you want to send?")){
+    document.getElementById("editTemplate").submit()
+    //document.getElementById("editTemplate").reset()
   }
 }
 
