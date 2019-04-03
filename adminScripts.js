@@ -16,41 +16,10 @@ function switchTabs(evt, tabs) {
 
   //sets new page be the default open screen
   document.getElementById("defaultOpen").click();
-
-   let templateMessage = document.getElementById("alertMessage");
-   let templateTitle = document.getElementById("alertTitle");
-   let templateType = document.getElementById("selectType");
   
    
   
-  
-  function fillTemplate() {
-  
-  let alertTemplate = event.target.value;
-  
-        switch (alertTemplate) {
-          case '':  {
-            templateMessage.value = "";
-            templateTitle.value = "";
-            templateType.value = "";
-            break;
-          }
-          case 'shooterMessage':  {
-            templateMessage.value = "Shooter on campus";
-            templateTitle.value = "Shooter";
-            templateType.value = "Emergency";
-            break;
-          }
-          case 'sportsMessage': {
-            templateMessage.value = "Basketball Game at 7";
-            templateTitle.value = "Sports Event";
-            templateType.value = "Sports";
-            break;
-  
-  }
-  
-        }
-  }
+
 
   function popupTemplateAdd() {
     const remote = require('electron').remote;
@@ -68,8 +37,8 @@ function switchTabs(evt, tabs) {
     var win = new BrowserWindow({ 
       width: 700, 
       height: 450,
-      frame: false });
-    win.setMenuBarVisibility(false);
+      frame: true });
+    win.setMenuBarVisibility(true);
     win.loadFile('createType.html');
   }
   function popupDeleted() {
@@ -92,7 +61,7 @@ function switchTabs(evt, tabs) {
   }
 
   function resetForm(){
-    window.reload();
+    window.reset();
   }
   function sendConfirm(){
     if(confirm("are you sure you want to send?")){
@@ -112,6 +81,113 @@ function sendTypeConfirm(){
     document.getElementById("sendNewType").reset()
   }
 }
+
+function deleteTemplateConfirm(){
+  if(confirm("are you sure you want to send?")){
+    document.getElementById("deleteTemplateID").submit()
+    document.getElementById("deleteTemplateID").reset()
+  }
+}
+
+
+
+const axios = require('axios')
+
+function getData(){
+  const axios = require('axios')
+axios.get("http://localhost:8081/get_templates")
+  .then((res) => {
+
+    const messageData = res.data
+    console.log("get template: " + messageData);
+
+    let x = document.getElementById("tempSelect");
+
+    
+    for( let i = 0; i < messageData.length; i++){
+       
+      let option = document.createElement("option");
+      option.innerHTML = messageData[i].Name;
+      option.id = messageData[i].ID
+      console.log(option)
+
+
+
+
+      x.options.add(option)
+    }
+
+
+    //window.$ = window.jQuery = require('jquery');
+    
+    const options = []
+
+    document.querySelectorAll('#tempSelect > option').forEach((option) => {
+        if (options.includes(option.value)) option.remove()
+        else options.push(option.value)
+    })
+
+
+  })
+axios.get("http://localhost:8081/get_types")
+  .then((res) => {
+
+    const messageData = res.data
+    console.log("get types: "+messageData);
+
+    let x = document.getElementById("MessageTypeID");
+
+    for( let i = 0; i < messageData.length; i++){
+       
+      let option = document.createElement("option");
+      option.innerHTML = messageData[i].Name;
+      option.value = messageData[i].ID
+      console.log(option)
+
+
+      x.options.add(option)
+    }
+
+
+
+        //window.$ = window.jQuery = require('jquery');
+    
+        const options = []
+
+        document.querySelectorAll('#MessageTypeID > option').forEach((option) => {
+            if (options.includes(option.value)) option.remove()
+            else options.push(option.value)
+        })
+
+  })
+
+ 
+
+
+
+}
+
+
+
+function fillTypeData(){
+  const axios = require('axios')
+
+  axios.get("http://localhost:8081/get_types")
+    .then((res) => {
+  
+    let messageData = res.data
+    console.log(messageData)
+    let sel = document.getElementById("MessageTypeID");
+  
+    let messagePriorityData = messageData[sel.selectedIndex-1].Priority;
+    let messageNameData = messageData[sel.selectedIndex-1].Name; 
+
+    document.getElementById("Priority").innerHTML = messagePriorityData;
+    document.getElementById("Name").innerHTML = messageNameData;
+
+      
+  })
+  }
   
 
 

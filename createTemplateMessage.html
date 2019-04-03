@@ -7,10 +7,13 @@
     <title>Create a new template</title>
     
   </head>
-  <body>
+  <body onload="getData()">
+    <div class="tab">
+  <button class="tablinks" onclick="switchTabs(event, 'newTemplate')" id = "defaultOpen">New Template</button>
+  <button class="tablinks" onclick="switchTabs(event, 'deleteTemplate')">Delete Template</button>
+</div>
 
-
-<div id="newMessage">
+<div id="newTemplate" class="tabcontent">
 
 
 
@@ -22,7 +25,9 @@
     <input type="text"  placeholder="Alert Title" id = "alertTitle" name = "Title">
 
     <label>Type</label>
-    <input type="text"  placeholder="Alert Type" id = "alertType" name = "MessageTypeID">
+    <select id ="MessageTypeID" name ="MessageTypeID">
+    <option>--Select Type--</option>
+    </select>
 
 
 
@@ -34,6 +39,21 @@
   </div>
   </form>
   
+
+</div>
+
+<div id = "deleteTemplate" class="tabcontent">
+
+<!--
+<form id="deleteTemplateID" action = "http://localhost:8081/delete_templates" method ="post">
+  <select id = "tempSelect" onChange = "fillFormData()" >
+        <option>--Select Template--</option>
+
+  </select>
+<input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
+</form>
+
+-->
 
 </div>
 
