@@ -142,6 +142,13 @@
     }
   }
 
+  function deleteTypeConfirm() {
+    if (confirm("are you sure you want to send?")) {
+      document.getElementById("deleteTypeID").submit()
+      document.getElementById("deleteTypeID").reset()
+    }
+  }
+
   ////////////////////////////////////////
   //Grabbing template data from database//
   ////////////////////////////////////////
@@ -153,7 +160,6 @@
       .then((res) => {
 
         const messageData = res.data
-        console.log("get template: " + messageData);
 
         let x = document.getElementById("tempSelect");
 
@@ -162,7 +168,7 @@
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.id = messageData[i].ID
-          console.log(option)
+
 
           x.options.add(option)
         }
@@ -188,7 +194,6 @@
       .then((res) => {
 
         const messageData = res.data
-        console.log("get types: " + messageData);
 
         let x = document.getElementById("MessageTypeID");
 
@@ -196,7 +201,6 @@
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.value = messageData[i].ID
-          console.log(option)
 
           x.options.add(option)
         }
@@ -248,10 +252,14 @@
         let messageTitleData = messageData[sel.selectedIndex - 1].Color;
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
+        let messageTypeID = messageData[sel.selectedIndex - 1].ID
 
         document.getElementById("Color").value = messageTitleData;
         document.getElementById("Priority").value = messageContentData;
         document.getElementById("Name").value = messageTypeData;
+        document.getElementById("ID").value = messageTypeID;
+
+      
       })
   }
 
@@ -271,13 +279,14 @@
         let messageContentData = messageData[sel.selectedIndex - 1].Content;
         let messageTypeData = messageData[sel.selectedIndex - 1].MessageTypeID;
         let messageNameData = messageData[sel.selectedIndex - 1].Name
+        let messageIdData = messageData[sel.selectedIndex - 1].ID
 
-        console.log(messageTypeData)
 
         document.getElementById("Titles").value = messageTitleData;
         document.getElementById("Contents").value = messageContentData;
         document.getElementById("MessageTypeID").value = messageTypeData;
         document.getElementById("Names").value = messageNameData;
+        document.getElementById("ID").value = messageIdData;
       })
   }
 
@@ -290,7 +299,6 @@
       .then((res) => {
 
         const messageData = res.data
-        console.log("get types: " + messageData);
 
         let x = document.getElementById("MessageTypeID2");
 
@@ -298,7 +306,7 @@
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.value = messageData[i].ID
-          console.log(option)
+
 
           x.options.add(option)
         }
@@ -317,7 +325,6 @@
       .then((res) => {
 
         const messageData = res.data
-        console.log("get template: " + messageData);
 
         let x = document.getElementById("tempSelect2");
 
@@ -326,7 +333,7 @@
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.id = messageData[i].ID
-          console.log(option)
+
 
           x.options.add(option)
         }
@@ -343,9 +350,30 @@
           else options.push(option.value)
         })
       })
+  }
 
+  function deleteTypeDropdown() {
+    axios.get("http://localhost:8081/get_types")
+      .then((res) => {
 
+        const messageData = res.data
 
+        let x = document.getElementById("MessageTypeID3");
+
+        for (let i = 0; i < messageData.length; i++) {
+          let option = document.createElement("option");
+          option.innerHTML = messageData[i].Name;
+          option.value = messageData[i].ID
+
+          x.options.add(option)
+        }
+        const options = []
+        document.querySelectorAll('#MessageTypeID3 > option').forEach((option) => {
+          if (options.includes(option.value)) option.remove()
+          else options.push(option.value)
+        })
+
+      })
   }
 
   ///////////

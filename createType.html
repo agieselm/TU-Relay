@@ -9,7 +9,7 @@
 
 </head>
 
-<body onload="getData()">
+<body onload="getData();deleteTypeDropdown()">
 
 
   <div class="tab">
@@ -59,6 +59,7 @@
 
 
       <input name="Color" placeholder="color" id="Color">
+      <input id="ID">
 
 
       <label>Name</label>
@@ -83,11 +84,12 @@
   <div id="deleteType" class="tabcontent">
     
 
-<form action = "http://localhost:8081/delete_types" method ="delete">
-    <select id ="MessageTypeID" class ="MessageTypeID">
+<form id = "deleteTypeID"action = "http://localhost:8081/delete_types" method ="post">
+    <select id ="MessageTypeID3" class ="MessageTypeID">
+            <option>--Select Type to Delete--</option>
 
     </select>
-<input type="button" value="Delete" onclick= "sendTypeConfirm()" >
+<input type="button" value="Delete" onclick= "deleteTypeConfirm()" >
 </form>
 
 
