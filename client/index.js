@@ -8,28 +8,36 @@ var FormData = require('form-data');
 let win = null
 
 // List of messages that have already been displayed
-var usedMessageIDs = [];
+var usedMessageIDs = [3];
 
 app.on('ready', () => {
 
   //function runs on an interval to check server for a new message  
   function checkServerForNewMessages() {
     
+    console.log(usedMessageIDs);
+
     //formdata to pass id to new_messages route
     var messageFormData = new FormData();
-    messageFormData.append('messageid', usedMessageIDs[0]);
+    messageFormData.append('messageid', usedMessageIDs[0].toString());
 
+    var obj = { messageid: usedMessageIDs[0].toString() };
+        
     //axios http request for new_messages route on server
     axios({
       method: 'post',
       url: 'http://localhost:8081/new_messages',
-      data: messageFormData,
-      config: { headers: { 'Content-Type': 'multipart/form-data' }}
+      data: JSON.stringify(obj),
+      headers: { 'Content-Type': 'application/json' }
     })
       //on success, start new browser window and send data to render process
       .then(res => {
+
         var messageData = res.data;
         console.log(messageData);
+        console.log(messageData[0].ID);
+        console.log(messageData[0].Title);
+        console.log(messageData[0].Content);
         //TODO: need to make the browser window size and position responsive
         win = new BrowserWindow(
           {
@@ -46,9 +54,11 @@ app.on('ready', () => {
         //callback to send message data to browser window
         //TODO: send correct object to html page
         win.webContents.on('did-finish-load', () => {
-          win.webContents.send('message:sendData', messageData)
+          win.webContents.send('message:sendData', messageData[0])
         })
-        usedMessageIDs.push(messageData.id);
+        usedMessageIDs.shift();
+        usedMessageIDs.push(messageData[0].ID);
+        console.log(usedMessageIDs);
       })
       //on failure, log errors
       .catch(err => {
