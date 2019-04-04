@@ -1,135 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <link href="adminClient.css" rel="stylesheet" type="text/css">
-    <meta charset="UTF-8">
-    <title>Create a new template</title>
-    
-  </head>
-  <body onload="getData()">
-    <div class="tab">
-  <button class="tablinks" onclick="switchTabs(event, 'newTemplate')" id = "defaultOpen">New Template</button>
-  <button class="tablinks" onclick="switchTabs(event, 'editTemplate')">Edit Template</button>
-  <button class="tablinks" onclick="switchTabs(event, 'deleteTemplate')">Delete Template</button>
+<head>
 
-</div>
+  <link href="adminClient.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>Create a new template</title>
 
-<div id="newTemplate" class="tabcontent">
+</head>
 
+<body onload="getData();grabDataForEditTemplateType();test()">
+  <div class="tab">
+    <button class="tablinks" onclick="switchTabs(event, 'newTemplate')" id="defaultOpen">New Template</button>
+    <button class="tablinks" onclick="switchTabs(event, 'editTemplate')">Edit Template</button>
+    <button class="tablinks" onclick="switchTabs(event, 'deleteTemplate')">Delete Template</button>
 
-
-  <form  id = "sendNewTemplate" action="http://localhost:8081/make_template" method ="post">
-    <label>Name<label>
-    <input type = "text" placeholder ="Enter Name" name = "Name">
-
-    <label>Title</label>
-    <input type="text"  placeholder="Alert Title" id = "alertTitle" name = "Title">
-
-    <label>Type</label>
-    <select class ="MessageTypeID" name ="MessageTypeID">
-    <option>--Select Type--</option>
-    </select>
-
-
-
-    <label >Content</label>
-    <input type="text" placeholder="Your alert message" id = "alertMessage2" name ="Content">
-  <div id = "container">
-    <input type="button" value="Save" onclick= "sendTemplateConfirm()" id ="templateSave">
-    <input type="button" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
   </div>
-  </form>
-  
 
-</div>
-
-<div id = "editTemplate" class="tabcontent">
+  <div id="newTemplate" class="tabcontent">
 
 
-<form id="editTemplate" action = "http://localhost:8081/edit_template" method ="post">
-  <select id = "tempSelect" onChange = "fillFormData()" >
+
+    <form id="sendNewTemplate" action="http://localhost:8081/make_template" method="post">
+      <label>Name<label>
+          <input type="text" placeholder="Enter Name" name="Name">
+
+          <label>Title</label>
+          <input type="text" placeholder="Alert Title" id="alertTitle" name="Title">
+
+          <label>Type</label>
+          <select id="MessageTypeID2" name="MessageTypeID">
+            <option>--Select Type--</option>
+          </select>
+
+
+
+          <label>Content</label>
+          <input type="text" placeholder="Your alert message" id="alertMessage2" name="Content">
+          <div id="container">
+            <input type="button" value="Save" onclick="sendTemplateConfirm()" id="templateSave">
+            <input type="button" value="Cancel" onclick="cancelConfirm()" id="templateCancel">
+          </div>
+    </form>
+
+
+  </div>
+
+  <div id="editTemplate" class="tabcontent">
+
+
+    <form id="editTemplates" action="http://localhost:8081/edit_template" method="post">
+      <select id="tempSelect" onChange="fillEditFormData()">
         <option>--Select Template--</option>
 
-  </select>
+      </select>
 
-    <label>Name<label>
-    <input type = "text" placeholder ="Enter Name" name = "Name" id = "Names">
+      <label>Name<label>
+          <input type="text" placeholder="Enter Name" name="Name" id="Names">
 
-    <label>Title</label>
-    <input type="text"  placeholder="Alert Title" id = "Titles" name = "Title">
+          <label>Title</label>
+          <input type="text" placeholder="Alert Title" id="Titles" name="Title">
 
-    <label>Type</label>
-    <select class ="MessageTypeID" name ="MessageTypeIDs">
-    <option>--Select Type--</option>
-    </select>
-
-
-
-    <label >Content</label>
-    <input type="text" placeholder="Your alert message" id = "Contents" name ="Content">
-
-
-<input type="button" value="Save" onclick= "editTemplateConfirm()" >
+          <label>Type</label>
+          <select id="MessageTypeID" name="MessageTypeID">
+            <option>--Select Type--</option>
+          </select>
 
 
 
+          <label>Content</label>
+          <input type="text" placeholder="Your alert message" id="Contents" name="Content">
 
-</form>
-</div>
 
-<div id = "deleteTemplate" class="tabcontent">
+          <input type="button" value="Save" onclick="editTemplateConfirm()">
 
-<!--
+
+
+
+    </form>
+  </div>
+
+  <div id="deleteTemplate" class="tabcontent">
+
+    
 <form id="deleteTemplateID" action = "http://localhost:8081/delete_templates" method ="post">
-  <select id = "tempSelect" onChange = "fillFormData()" >
+  <select id = "tempSelect2" onChange = "fillFormData()" >
         <option>--Select Template--</option>
 
   </select>
 <input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
 </form>
 
--->
-
-</div>
 
 
-  </body>
-  <script src = "adminScripts.js"></script>
-
-  <script>
+  </div>
 
 
+</body>
 
-
-function fillFormData(){
-axios.get("http://localhost:8081/get_templates")
-  .then((res) => {
-
-  let messageData = res.data
-  let sel = document.getElementById("tempSelect");
-
-
-  let messageTitleData = messageData[sel.selectedIndex-1].Title;
-  let messageContentData = messageData[sel.selectedIndex-1].Content;
-  let messageTypeData = messageData[sel.selectedIndex-1].MessageTypeID;
-  let messageNameData = messageData[sel.selectedIndex-1].Name
-    
-    
-
-  document.getElementById("Titles").value = messageTitleData;
-  document.getElementById("Contents").value = messageContentData;
-  document.getElementsByClassName("MessageTypeIDs").value = messageTypeData;
-  document.getElementById("Names").value = messageNameData;
-    
-})
-
-
-}
-
-
-</script>
-
-
+<script src="adminScripts.js"></script>
 
 </html>

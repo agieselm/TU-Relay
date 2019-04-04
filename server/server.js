@@ -164,7 +164,7 @@ app.post('/edit_type', upload.none(), function (req, res) {
     res.status(204).send();
 })
 
-app.delete('/delete_types', upload.none(), function (req, res) {
+app.post('/delete_types', upload.none(), function (req, res) {
     //Delete the specified types from the database.
     for (let id in req.body.messagetypes) {
         connection.query("UPDATE messagetype SET Deleted = 'T' WHERE ID = ?", id, function (err, rows, fields) {
@@ -243,7 +243,7 @@ app.post('/edit_template', upload.single("blob"), function (req, res) {
     }
 })
 
-app.delete('/delete_templates', upload.none(), function (req, res) {
+app.post('/delete_templates', upload.none(), function (req, res) {
     //Delete the specified templates from the database
     for (let id in req.body.messagetemplates) {
         connection.query("UPDATE messagetemplate SET Deleted = 'T' WHERE ID = ?", id, function (err, rows, fields) {

@@ -1,148 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
+  </script>
 
-    <link href="adminClient.css" rel="stylesheet" type="text/css">
-    <meta charset="UTF-8">
-    <title>Admin Client App</title>
-    
-  </head>
-  <body onload="getData()">
+  <link href="adminClient.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>Admin Client App</title>
 
-    <div class="tab">
-  <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id = "defaultOpen">New Message</button>
-  <button class="tablinks" onclick="switchTabs(event, 'oldMessage')">Old Messages</button>
-</div>
+</head>
 
-<div id="newMessage"class="tabcontent">
+<body onload="getData()">
 
-<!-- template add button -->
-  <label>Template</label>
-  <button onclick = "popupTemplateAdd()" id = "addButton"> + </button>
-<!-- Drop down for template-->
-  <select name = "tempSelect"id = "tempSelect" onChange = "fillFormData()" >
-        <option>--Select Template--</option>
-
-  </select>
-  
-
-        <label>Type</label>
-    <button id ="addButton" onclick="popupTypeAdd()">+</button>
-  <form id="sendNewMessage" action="http://localhost:8081/send_message" method="post">
-
-     
-<!-- Drop down for types -->
-    <select id ="MessageTypeID">
-    <option>--Select Type--</option>
-    </select>
-    <label>Title</label>
-    <input id = "Title" type="text" name="Title" placeholder="Alert Title">
-
-<!-- add type button-->
-
-
-<!-- Message textbox -->
-    <label >Content</label>
-    <input type="text" placeholder="Your alert message" id ="Content" name ="Content" >
-    <form action="" method="post" enctype="multipart/form-data" >
-      <label> Upload an Image </input><br>
-      <input id="imgUpload"type="file" name="avatar" accept=".jpg, .jpeg, .png, .pdf, .img"/>
-    </form>
-  
-    <input type="button" value="Submit" id="sendAlertButton" onclick="sendConfirm()">
-    <input type="button" value="Reset" id="sendAlertButton" onclick="resetForm()">
-
-
-    
-  </form>
-</div>
-
-<div id="oldMessage" class="tabcontent"> 
-<div class="vertical-menu">
-  <a href="#" class="active">Home</a>
-  <a href="#">Message 1</a>
-  <a href="#">Message 2</a>
-  <a href="#">Message 3</a>
-  <a href="#">Message 4</a>
-  <a href="#">Message 1</a>
-  <a href="#">Message 2</a>
-  <a href="#">Message 3</a>
-  <a href="#">Message 4</a>
-  <a href="#">Message 1</a>
-  <a href="#">Message 2</a>
-  <a href="#">Message 3</a>
-  <a href="#">Message 4</a>
-</div>
-<div class="deleted">
-  <button class="deleted" onclick="popupDeleted()">Deleted Messages</button> 
+  <div class="tab">
+    <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id="defaultOpen">New Message</button>
+    <button class="tablinks" onclick="switchTabs(event, 'oldMessage')">Old Messages</button>
   </div>
-</div>
 
-  </body>
+  <div id="newMessage" class="tabcontent">
+
+    <!-- template add button -->
+    <label>Template</label>
+    <button onclick="popupTemplateAdd()" id="addButton"> + </button>
+    <!-- Drop down for template-->
+    <select name="tempSelect" id="tempSelect" onChange="fillFormData()">
+      <option>--Select Template--</option>
+
+    </select>
 
 
-<script src ="adminScripts.js"> 
+    <label>Type</label>
+    <button id="addButton" onclick="popupTypeAdd()">+</button>
+    <form id="sendNewMessage" action="http://localhost:8081/send_message" method="post">
+
+
+      <!-- Drop down for types -->
+      <select id="MessageTypeID">
+        <option>--Select Type--</option>
+      </select>
+      <label>Title</label>
+      <input id="Title" type="text" name="Title" placeholder="Alert Title">
+
+      <!-- add type button-->
+
+
+      <!-- Message textbox -->
+      <label>Content</label>
+      <input type="text" placeholder="Your alert message" id="Content" name="Content">
+      <form action="" method="post" enctype="multipart/form-data">
+        <label> Upload an Image </input><br>
+          <input id="imgUpload" type="file" name="avatar" accept=".jpg, .jpeg, .png, .pdf, .img" />
+      </form>
+
+      <input type="button" value="Submit" id="sendAlertButton" onclick="sendConfirm()">
+      <input type="button" value="Reset" id="sendAlertButton" onclick="resetForm()">
+
+
+
+    </form>
+  </div>
+
+  <div id="oldMessage" class="tabcontent">
+    <div class="vertical-menu">
+      <a href="#" class="active">Home</a>
+      <a href="#">Message 1</a>
+      <a href="#">Message 2</a>
+      <a href="#">Message 3</a>
+      <a href="#">Message 4</a>
+      <a href="#">Message 1</a>
+      <a href="#">Message 2</a>
+      <a href="#">Message 3</a>
+      <a href="#">Message 4</a>
+      <a href="#">Message 1</a>
+      <a href="#">Message 2</a>
+      <a href="#">Message 3</a>
+      <a href="#">Message 4</a>
+    </div>
+    <div class="deleted">
+      <button class="deleted" onclick="popupDeleted()">Deleted Messages</button>
+    </div>
+  </div>
+
+</body>
+
+
+<script src="adminScripts.js">
 </script>
 
 
-<script>
-
-
-
-
-function fillFormData(){
-axios.get("http://localhost:8081/get_templates")
-  .then((res) => {
-
-  let messageData = res.data
-  let sel = document.getElementById("tempSelect");
-
-
-  let messageTitleData = messageData[sel.selectedIndex-1].Title;
-  let messageContentData = messageData[sel.selectedIndex-1].Content;
-  let messageTypeData = messageData[sel.selectedIndex-1].MessageTypeID;
-    
-    
-
-  document.getElementById("Title").value = messageTitleData;
-  document.getElementById("Content").value = messageContentData;
-  document.getElementById("MessageTypeID").value = messageTypeData;
-    
-})
-
-
-}
-
-
-</script>
 
 <script>
-
-
-
-
-/*
-function test(){
-axios.get("http://localhost:8081/get_templates")
-  .then((res) => {
-
-let messageData = res.data
-
-console.log(messageData.length)
-console.log(res.data.length)
-console.log(ty.length)
-
-if(ty.length !== res.data.length){
-  getData();
-}
-
-  })
-}*/
-
-  setInterval(getData,5000);
-
+  
 </script>
 
 

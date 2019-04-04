@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <link href="adminClient.css" rel="stylesheet" type="text/css">
-    <meta charset="UTF-8">
-    <title>Add a new type</title>
+<head>
+
+  <link href="adminClient.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>Add a new type</title>
+
+</head>
+
+<body onload="getData()">
+
+
+  <div class="tab">
+    <button class="tablinks" onclick="switchTabs(event, 'newType')" id="defaultOpen">New Type</button>
+    <button class="tablinks" onclick="switchTabs(event, 'editType')">Edit Type</button>
+    <button class="tablinks" onclick="switchTabs(event, 'deleteType')">Delete Type</button>
+  </div>
+  <div id="newType" class="tabcontent">
+
+
+
+
+
+    <form id="sendNewType" action="http://localhost:8081/make_type" method="post">
+      <label>Make new Type</label>
+
+      <input name="Color" placeholder="color">
+
+
+      <label>Name</label>
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name">
+
+      <label>Priority</label>
+      <select class="Priority" name="Priority">
+        <option>--Select a Priority--</option>
+        <option value=0>1 - Highest </option>
+        <option value=1>2</option>
+        <option value=2>3</option>
+        <option value=3>4 - Lowest</option>
+      </select>
+
+      <div id="container">
+        <input type="button" value="Save" onclick="sendTypeConfirm()" id="templateSave">
+        <input type="button" value="Cancel" onclick="cancelConfirm()" id="templateCancel">
+      </div>
+
+    </form>
+
+  </div>
+
+  <div id="editType" class="tabcontent">
+
+    <form id="edittype" action="http://localhost:8081/edit_type" method="post">
+      <select id="MessageTypeID" class="MessageTypeID" onchange="fillEditType()">
+        <option>--Select Type to Edit--</option>
+      </select>
+
+
+      <input name="Color" placeholder="color" id="Color">
+
+
+      <label>Name</label>
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id="Name">
+
+      <label>Priority</label>
+      <select class="Priority" name="Priority" id="Priority">
+        <option>--Select a Priority--</option>
+        <option value=0>1 - Highest </option>
+        <option value=1>2</option>
+        <option value=2>3</option>
+        <option value=3>4 - Lowest</option>
+      </select>
+
+
+
+      <input type="button" value="Save" onclick="editTypeConfirm()">
+    </form>
+
+  </div>
+
+  <div id="deleteType" class="tabcontent">
     
-  </head>
-  <body onload="getData()">
-
-
-<div class="tab">
-  <button class="tablinks" onclick="switchTabs(event, 'newType')" id = "defaultOpen">New Type</button>
-  <button class="tablinks" onclick="switchTabs(event, 'editType')">Edit Type</button>
-  <button class="tablinks" onclick="switchTabs(event, 'deleteType')">Delete Type</button>
-</div>
-<div id="newType" class="tabcontent">
-
-
-
-
-
-  <form  id = "sendNewType" action="http://localhost:8081/make_type" method = "post">
-   <label>Make new Type</label>
-
-   <input name="Color" placeholder = "color">
-
-
-   <label>Name</label>
-   <input type="text"  placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class = "Name">
-          
-   <label>Priority</label>
-   <select class = "Priority" name ="Priority">
-     <option>--Select a Priority--</option>
-     <option value = 0>1 - Highest </option>
-     <option value = 1>2</option>
-     <option value = 2>3</option>
-     <option value = 3 >4 - Lowest</option>
-   </select>
-          
-   <div id = "container">
-     <input type="button" value="Save" onclick= "sendTypeConfirm()" id ="templateSave">
-     <input type="button" value="Cancel"  onclick= "cancelConfirm()" id = "templateCancel">
-   </div>
-  
-  </form>
-
-</div>
-
-<div id="editType" class="tabcontent">
-
-<form id = "edittype" action = "http://localhost:8081/edit_type" method ="post">
-    <select id ="MessageTypeID" class ="MessageTypeID" onchange = "fillFormData()">
-    <option>--Select Type to Edit--</option>
-    </select>
-
-
-   <input name="Color" placeholder = "color" id = "Color">
-
-
-   <label>Name</label>
-   <input type="text"  placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class = "Name" id ="Name">
-          
-   <label>Priority</label>
-   <select class = "Priority" name ="Priority" id = "Priority">
-     <option>--Select a Priority--</option>
-     <option value = 0>1 - Highest </option>
-     <option value = 1>2</option>
-     <option value = 2>3</option>
-     <option value = 3 >4 - Lowest</option>
-   </select>
-
-
-
-<input type="button" value="Save" onclick= "editTypeConfirm()" >
-</form>
-
-</div>
-
-<div id="deleteType" class="tabcontent">
-<!--
 
 <form action = "http://localhost:8081/delete_types" method ="delete">
     <select id ="MessageTypeID" class ="MessageTypeID">
@@ -88,41 +90,14 @@
 <input type="button" value="Delete" onclick= "sendTypeConfirm()" >
 </form>
 
--->
 
 
-</div>
+
+  </div>
 
 
-  </body>
-  <script src = "adminScripts.js"></script>
-
-  <script>
-function fillFormData(){
-axios.get("http://localhost:8081/get_types")
-  .then((res) => {
-
-  let messageData = res.data
-  let sel = document.getElementById("MessageTypeID");
-
-
-  let messageTitleData = messageData[sel.selectedIndex-1].Color;
-  let messageContentData = messageData[sel.selectedIndex-1].Priority;
-  let messageTypeData = messageData[sel.selectedIndex-1].Name;
-    
-    
-
-  document.getElementById("Color").value = messageTitleData;
-  document.getElementById("Priority").value = messageContentData;
-  document.getElementById("Name").value = messageTypeData;
-    
-})
-
-
-}
-
-  </script>
-
+</body>
+<script src="adminScripts.js"></script>
 
 
 </html>
