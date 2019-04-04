@@ -165,7 +165,7 @@ app.post('/edit_type', upload.none(), function(req, res, next) {
     connection.query('UPDATE messagetype SET ? WHERE ID = ?', [messagetype, req.body.ID], function (err, rows,fields) {
         if (err) next(err);
     })
-
+    console.log(req.body.ID)
     res.status(204).send();
 })
 
@@ -244,7 +244,8 @@ app.post('/edit_template', upload.single("blob"), function(req, res, next) {
         connection.query('UPDATE messagetemplate SET ? WHERE ID = ?', [messagetemplate, req.body.ID], function (err, rows, fields) {
             if (err) next(err);
         });
-    
+        console.log(req.body.ID)
+        console.log(req.body)
         res.status(204).send();
     }
 })

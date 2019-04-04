@@ -249,6 +249,7 @@
         let messageData = res.data
         let sel = document.getElementById("MessageTypeID");
 
+
         let messageTitleData = messageData[sel.selectedIndex - 1].Color;
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
