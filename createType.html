@@ -9,7 +9,7 @@
 
 </head>
 
-<body onload="getData();deleteTypeDropdown()">
+<body onload="grabDataForEditType();deleteTypeDropdown()">
 
 
   <div class="tab">
@@ -17,24 +17,20 @@
     <button class="tablinks" onclick="switchTabs(event, 'editType')">Edit Type</button>
     <button class="tablinks" onclick="switchTabs(event, 'deleteType')">Delete Type</button>
   </div>
+  
   <div id="newType" class="tabcontent">
-
-
-
-
-
-    <form id="sendNewType" action="http://localhost:8081/make_type" method="post">
+    <form id="sendNewType" action="http://:8081/make_type" method="post">
       <label>Make new Type</label>
 
-      <input name="Color" placeholder="color">
+      <input name="Color" placeholder="color" id = "Color">
 
 
       <label>Name</label>
-      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name">
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id ="Name">
 
       <label>Priority</label>
-      <select class="Priority" name="Priority">
-        <option>--Select a Priority--</option>
+      <select class="Priority" name="Priority" id="Priority">
+        <option hidden value = "no">--Select a Priority--</option>
         <option value=0>1 - Highest </option>
         <option value=1>2</option>
         <option value=2>3</option>
@@ -52,22 +48,22 @@
 
   <div id="editType" class="tabcontent">
 
-    <form id="edittype" action="http://localhost:8081/edit_type" method="post">
-      <select id="MessageTypeID" class="MessageTypeID" onchange="fillEditType()">
-        <option>--Select Type to Edit--</option>
+    <form id="edittypee" action="http://:8081/edit_type" method="post">
+      <select id="MessageTypeIDs" name = "MessageTypeID" class="MessageTypeID" onchange="fillEditType()">
+        <option hidden value = "no">--Select Type to Edit--</option>
       </select>
 
 
-      <input name="Color" placeholder="color" id="Color">
-      <input id="ID" name = "ID" type="hidden">
+      <input name="Color" placeholder="color" id="Color2">
+      <input id="ID2" name = "ID" type="hidden">
 
-
+      <br>
       <label>Name</label>
-      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id="Name">
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id="Name2">
 
       <label>Priority</label>
-      <select class="Priority" name="Priority" id="Priority">
-        <option>--Select a Priority--</option>
+      <select class="Priority" name="Priority" id="Priority2">
+        <option hidden>--Select a Priority--</option>
         <option value=0>1 - Highest </option>
         <option value=1>2</option>
         <option value=2>3</option>
@@ -83,12 +79,15 @@
 
   <div id="deleteType" class="tabcontent">
     
-
-<form id = "deleteTypeID"action = "http://localhost:8081/delete_types" method ="post">
-    <select id ="MessageTypeID3" class ="MessageTypeID">
-            <option>--Select Type to Delete--</option>
+        <select id ="MessageTypeID3" class ="MessageTypeID" onchange ="deleteTypeForm()">
+            <option hidden>--Select Type to Delete--</option>
 
     </select>
+
+<form id = "deleteTypeID"action = "http://:8081/delete_type" method ="post">
+
+              <input id = "IDss" name = "MessageTypeID" type ="">
+
 <input type="button" value="Delete" onclick= "deleteTypeConfirm()" >
 </form>
 

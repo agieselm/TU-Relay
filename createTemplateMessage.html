@@ -21,16 +21,16 @@
 
 
 
-    <form id="sendNewTemplate" action="http://localhost:8081/make_template" method="post">
+    <form id="sendNewTemplate" action="http://:8081/make_template" method="post">
       <label>Name<label>
-          <input type="text" placeholder="Enter Name" name="Name">
+          <input type="text" placeholder="Enter Name" name="Name" id = "Name">
 
           <label>Title</label>
           <input type="text" placeholder="Alert Title" id="alertTitle" name="Title">
 
           <label>Type</label>
           <select id="MessageTypeID2" name="MessageTypeID">
-            <option>--Select Type--</option>
+            <option hidden value = "no">--Select Type--</option>
           </select>
 
 
@@ -49,9 +49,9 @@
   <div id="editTemplate" class="tabcontent">
 
 
-    <form id="editTemplates" action="http://localhost:8081/edit_template" method="post">
+    <form id="editTemplates" action="http://:8081/edit_template" method="post">
       <select id="tempSelect" onChange="fillEditFormData()">
-        <option>--Select Template--</option>
+        <option hidden value = "no">--Select Template--</option>
 
       </select>
 
@@ -63,7 +63,7 @@
 
           <label>Type</label>
           <select id="MessageTypeID" name="MessageTypeID">
-            <option>--Select Type--</option>
+            <option hidden value = "no">--Select Type--</option>
           </select>
 
 
@@ -84,12 +84,17 @@
 
   <div id="deleteTemplate" class="tabcontent">
 
-    
-<form id="deleteTemplateID" action = "http://localhost:8081/delete_templates" method ="post">
-  <select id = "tempSelect2" onChange = "fillFormData()" >
-        <option>--Select Template--</option>
+      <select id = "tempSelect2" onChange = "fillFormDatassss()" >
+        <option hidden>--Select Template--</option>
+
 
   </select>
+<form id="deleteTemplateID" action = "http://:8081/delete_template" method ="post">
+
+<!--MessageTemplateID
+MessageTypeID-->
+
+          <input id = "IDs" name = "MessageTemplateID" type ="">
 <input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
 </form>
 
