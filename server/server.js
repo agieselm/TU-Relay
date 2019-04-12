@@ -65,9 +65,15 @@ app.post('/new_messages', upload.none(), function(req, res, next) {
 
 app.post('/deleted_messages', upload.none(), function(req, res, next) {
     //Access DB and return all messages.
-    connection.query("SELECT * FROM message WHERE Deleted = 'T'", function (err, rows, fields) {
+    connection.query("SELECT * FROM message WHERE Deleted = 'T' ORDER BY DateDeleted DESCENDING", function (err, rows, fields) {
         if (err) next(err);
+        for (let row in rows) {
+            connection.query("UPDATE message SET DateDeleted = CURRENT_TIME() WHERE ID = ?", row.ID, function (err, rows, fields) {
+
+            })
+        }
         
+        connection.query()
         res.status(200).json(rows);
     });
 })
@@ -102,16 +108,18 @@ app.post('/send_message', upload.single("blob"), function(req, res, next) {
 })
 
 app.post('/delete_messages', upload.none(), function(req, res, next) {
-    //Change specified messages' delete flag to true
-    for (let i = 0; i < req.body.messages.length; i++) {
-        console.log(req.body.messages[i]);
-        connection.query("UPDATE message SET Deleted = 'T' WHERE ID = ?", req.body.messages[i], function (err, rows, fields) {
-            if (err) next(err);
-        });
+    //Change specified messages' delete flag to true and updates DateDeleted
+    if (req.body.messages) {
+        for (let i = 0; i < req.body.messages.length; i++) {
+            connection.query("UPDATE message SET Deleted = 'T', DateDeleted = CURRENT_TIME() WHERE ID = ?", req.body.messageid, function (err, rows, fields) {
+                if (err) next(err);
+            });
+        }
+        res.status(204).send();
+    } else {
+        res.status(400).send();
     }
-    res.status(204);
 
-    res.send();
 })
 
 app.post('/undelete_messages', upload.none(), function(req, res, next) {
@@ -142,8 +150,7 @@ app.post('/make_type', upload.none(), function(req, res, next) {
     //Retrieves type info from post and add to DB
     let messagetype = {
         Name: req.body.Name,
-        Priority: req.body.Priority,
-        Color: req.body.Color
+        Priority: req.body.Priority
     }
 
     connection.query('INSERT INTO messagetype SET ?', messagetype, function (err, rows, fields) {
@@ -158,8 +165,7 @@ app.post('/edit_type', upload.none(), function(req, res, next) {
     //TODO: Edit type using provided info
     let messagetype = {
         Name: req.body.Name,
-        Priority: req.body.Priority,
-        Color: req.body.Color
+        Priority: req.body.Priority
     }
 
     connection.query('UPDATE messagetype SET ? WHERE ID = ?', [messagetype, req.body.ID], function (err, rows,fields) {
@@ -169,16 +175,13 @@ app.post('/edit_type', upload.none(), function(req, res, next) {
     res.status(204).send();
 })
 
-app.post('/delete_types', upload.none(), function(req, res, next) {
+app.post('/delete_type', upload.none(), function(req, res, next) {
     //Delete the specified types from the database.
-    for (let id in req.body.messagetypes) {
-        connection.query("UPDATE messagetype SET Deleted = 'T' WHERE ID = ?", id, function (err, rows, fields) {
-            if (err) next(err);
-        });
-    }
-    res.status(204);
-
-    res.send();
+    connection.query("UPDATE messagetype SET Deleted = 'T' WHERE ID = ?", req.body.MessageTypeID, function (err, rows, fields) {
+        if (err) next(err);
+    });
+    
+    res.status(204).send();
 })
 
 app.get('/get_templates', upload.none(), function(req, res, next) {
@@ -250,16 +253,13 @@ app.post('/edit_template', upload.single("blob"), function(req, res, next) {
     }
 })
 
-app.post('/delete_templates', upload.none(), function(req, res, next) {
+app.post('/delete_template', upload.none(), function(req, res, next) {
     //Delete the specified templates from the database
-    for (let id in req.body.messagetemplates) {
-        connection.query("UPDATE messagetemplate SET Deleted = 'T' WHERE ID = ?", id, function (err, rows, fields) {
-            if (err) next(err);
-        });
-    }
-    res.status(204);
-
-    res.send();
+    connection.query("UPDATE messagetemplate SET Deleted = 'T' WHERE ID = ?", req.body.MessageTemplateID, function (err, rows, fields) {
+        if (err) next(err);
+    });
+    
+    res.status(204).send();
 })
 
 var server = app.listen(8081, function () {
