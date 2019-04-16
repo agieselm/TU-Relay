@@ -1,3 +1,22 @@
+function prevAlerts () {
+	const BrowserWindow = require('electron').remote.BrowserWindow
+
+	// grab reference to main window
+	// let p = BrowserWindow.fromId(0)
+
+	// make this window child of above by adding parent: to ¿constructor?
+	// make modal, "modal: true", must have parent
+	var win = new BrowserWindow({ width: 800, height: 700, show: false, center: true })
+
+	win.id = 1
+
+	win.loadFile('previous_alerts.html')
+
+	win.once('ready-to-show', () => { win.show() })
+
+	win.on('closed', () => { win = null })
+
+}
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
   //////////////////////////////////////////////
