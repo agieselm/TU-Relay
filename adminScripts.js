@@ -17,6 +17,9 @@ function prevAlerts () {
 	win.on('closed', () => { win = null })
 
 }
+  let reloadpage = false;
+  //change color of buttons
+  
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
   //////////////////////////////////////////////
@@ -42,12 +45,13 @@ function prevAlerts () {
   ///////////////////////////////////////////////////////
   //When clicked opens add/edit/delete template options//
   ///////////////////////////////////////////////////////
+  var win = null;
   function popupTemplateAdd() {
     const remote = require('electron').remote;
     const BrowserWindow = remote.BrowserWindow;
-    var win = new BrowserWindow({
+     win = new BrowserWindow({
       width: 700,
-      height: 525,
+      height: 585,
       frame: true
     });
     win.setMenuBarVisibility(true);
@@ -57,16 +61,19 @@ function prevAlerts () {
   //////////////////////////////////////////////////////
   //When clicked opens add/edit/delete type options//
   ///////////////////////////////////////////////////////
+
+  var win2 = null;
   function popupTypeAdd() {
     const remote = require('electron').remote;
     const BrowserWindow = remote.BrowserWindow;
-    var win = new BrowserWindow({
+     win2 = new BrowserWindow({
       width: 700,
       height: 450,
       frame: true
     });
-    win.setMenuBarVisibility(true);
-    win.loadFile('createType.html');
+    win2.setMenuBarVisibility(true);
+    win2.loadFile('createType.html');
+
   }
   ///////////////////////////////////////
   //When clicked opens deleted messages//
@@ -74,7 +81,7 @@ function prevAlerts () {
   function popupDeleted() {
     const remote = require('electron').remote;
     const BrowserWindow = remote.BrowserWindow;
-    var win = new BrowserWindow({
+     win = new BrowserWindow({
       width: 700,
       height: 380,
       frame: false
@@ -97,7 +104,7 @@ function prevAlerts () {
   //Clear form. NOT FUNCTIONAL//
   /////////////////////////////
   function resetForm() {
-    window.reset();
+    location.reload();
   }
 
   /////////////////////////////////////////
@@ -105,8 +112,19 @@ function prevAlerts () {
   ////////////////////////////////////////
   function sendConfirm() {
     if (confirm("are you sure you want to send?")) {
+      let x = document.getElementById("MessageTypeID");
+      let y = document.getElementById("Title");
+      let z = document.getElementById("Content");
+      console.log(x)
+      console.log(y)
+      console.log(z)
+      if( x.value  === "no" || y.value === "" || z.value === ""){
+        alert("Please enter all fields")
+        }else{
       document.getElementById("sendNewMessage").submit()
       document.getElementById("sendNewMessage").reset()
+      }
+
     }
   }
 
@@ -115,41 +133,87 @@ function prevAlerts () {
   /////////////////////////////////////////
   function sendTemplateConfirm() {
     if (confirm("are you sure you want to send?")) {
+      let w = document.getElementById("Name")
+      let x = document.getElementById("MessageTypeID2");
+      let y = document.getElementById("alertTitle");
+      let z = document.getElementById("alertMessage2");
+      console.log(x)
+      console.log(y)
+      console.log(z)
+      if( x.value  === "no" || y.value === "" || z.value === "" || w.value === ""){
+        alert("Please enter all fields")
+        }else{
       document.getElementById("sendNewTemplate").submit()
       document.getElementById("sendNewTemplate").reset()
     }
   }
+}
 
   /////////////////////////////////////
   //Are you sure for: Making new Type//
   /////////////////////////////////////
   function sendTypeConfirm() {
     if (confirm("are you sure you want to send?")) {
+      let w = document.getElementById("Color")
+      let x = document.getElementById("Priority");
+      let y = document.getElementById("Name");
+      console.log(x)
+      console.log(y)
+      console.log(w)
+      if( x.value  === "no" || y.value === ""  || w.value === ""){
+        alert("Please enter all fields")
+        }else{
       document.getElementById("sendNewType").submit()
       document.getElementById("sendNewType").reset()
     }
   }
+}
 
   //////////////////////////////////
   //Are you sure for: Editing type//
   //////////////////////////////////
   function editTypeConfirm() {
     if (confirm("are you sure you want to send?")) {
-      document.getElementById("edittype").submit()
-      document.getElementById("edittype").reset()
+      let w = document.getElementById("Priority2")
+      let x = document.getElementById("MessageTypeIDs");
+      let y = document.getElementById("Name2");
+      console.log(x)
+      console.log(y)
+      console.log(w)
+      if( x.value  === "no" || y.value === ""  || w.value === ""){
+        alert("Please enter all fields")
+        }else{
+      document.getElementById("edittypee").submit()
+      document.getElementById("edittypee").reset()
+
     }
   }
+}
 
   //////////////////////////////////////
   //Are you sure for: Editing template//
   //////////////////////////////////////
   function editTemplateConfirm() {
     if (confirm("are you sure you want to send?")) {
+      let v = document.getElementById("MessageTypeID")
+      let w = document.getElementById("Names")
+      let x = document.getElementById("editTemplates");
+      let y = document.getElementById("Titles");
+      let z = document.getElementById("Contents");
+      console.log(x)
+      console.log(y)
+      console.log(z)
+      console.log(w)
+      console.log(v)
+      if( x.value  === "no" || y.value === "" || z.value === "" || w.value === "" || v.value === "no"){
+        alert("Please enter all fields")
+        }else{
       document.getElementById("editTemplates").submit()
       document.getElementById("editTemplates").reset()
       console.log("edittemplate sent")
     }
   }
+}
 
   ////////////////////////////////////////
   //Are you sure for: Deleting Template //
@@ -175,7 +239,7 @@ function prevAlerts () {
 
   function getData() {
     const axios = require('axios')
-    axios.get("http://localhost:8081/get_templates")
+    axios.get("http://:8081/get_templates")
       .then((res) => {
 
         const messageData = res.data
@@ -209,7 +273,7 @@ function prevAlerts () {
     ////////////////////////////////////
     //Grabbing type data from database//
     ////////////////////////////////////
-    axios.get("http://localhost:8081/get_types")
+    axios.get("http://:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -220,6 +284,7 @@ function prevAlerts () {
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.value = messageData[i].ID
+
 
           x.options.add(option)
         }
@@ -241,7 +306,7 @@ function prevAlerts () {
   /////////////////////////////////////////
 
   function fillFormData() {
-    axios.get("http://localhost:8081/get_templates")
+    axios.get("http://:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -250,7 +315,7 @@ function prevAlerts () {
         let messageTitleData = messageData[sel.selectedIndex - 1].Title;
         let messageContentData = messageData[sel.selectedIndex - 1].Content;
         let messageTypeData = messageData[sel.selectedIndex - 1].MessageTypeID;
-
+        
         document.getElementById("Title").value = messageTitleData;
         document.getElementById("Content").value = messageContentData;
         document.getElementById("MessageTypeID").value = messageTypeData;
@@ -262,22 +327,26 @@ function prevAlerts () {
   ////////////////////////////////////////
 
   function fillEditType() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get("http://:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
-        let sel = document.getElementById("MessageTypeID");
-
+        let sel = document.getElementById("MessageTypeIDs");
 
         let messageTitleData = messageData[sel.selectedIndex - 1].Color;
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
         let messageTypeID = messageData[sel.selectedIndex - 1].ID
 
-        document.getElementById("Color").value = messageTitleData;
-        document.getElementById("Priority").value = messageContentData;
-        document.getElementById("Name").value = messageTypeData;
-        document.getElementById("ID").value = messageTypeID;
+        console.log(messageTitleData)
+        console.log(messageContentData)
+        console.log(messageTypeData)
+        console.log(messageTypeID)
+
+        document.getElementById("Color2").value = messageTitleData;
+        document.getElementById("Priority2").value = messageContentData;
+        document.getElementById("Name2").value = messageTypeData;
+        document.getElementById("ID2").value = messageTypeID;
 
       
       })
@@ -289,7 +358,7 @@ function prevAlerts () {
   ////////////////////////////////
 
   function fillEditFormData() {
-    axios.get("http://localhost:8081/get_templates")
+    axios.get("http://:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -315,7 +384,7 @@ function prevAlerts () {
   ////////////////////////////////////////////////
 
   function grabDataForEditTemplateType() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get("http://:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -338,33 +407,54 @@ function prevAlerts () {
       })
   }
 
-  function test(){
 
-    const axios = require('axios')
-    axios.get("http://localhost:8081/get_templates")
+
+  function grabDataForEditType() {
+    axios.get("http://:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
 
+        let x = document.getElementById("MessageTypeIDs");
+
+        for (let i = 0; i < messageData.length; i++) {
+          let option = document.createElement("option");
+          option.innerHTML = messageData[i].Name;
+          option.value = messageData[i].ID
+
+
+          x.options.add(option)
+        }
+        const options = []
+        document.querySelectorAll('#MessageTypeIDs > option').forEach((option) => {
+          if (options.includes(option.value)) option.remove()
+          else options.push(option.value)
+        })
+      })
+  }
+
+  function test(){
+
+    const axios = require('axios')
+    axios.get("http://:8081/get_templates")
+      .then((res) => {
+
+        let messageData = res.data
         let x = document.getElementById("tempSelect2");
 
         for (let i = 0; i < messageData.length; i++) {
-
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.id = messageData[i].ID
-
-
+          
           x.options.add(option)
         }
 
         //////////////////////////////////////////////////
         //removing all duplicates from template dropdown//
         //////////////////////////////////////////////////
-
-
+       
         const options = []
-
         document.querySelectorAll('#tempSelect2 > option').forEach((option) => {
           if (options.includes(option.value)) option.remove()
           else options.push(option.value)
@@ -373,11 +463,11 @@ function prevAlerts () {
   }
 
   function deleteTypeDropdown() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get("http://:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
-
+        console.log(messageData)
         let x = document.getElementById("MessageTypeID3");
 
         for (let i = 0; i < messageData.length; i++) {
@@ -396,8 +486,50 @@ function prevAlerts () {
       })
   }
 
+  function fillFormDatassss() {
+    axios.get("http://:8081/get_templates")
+      .then((res) => {
+
+        let messageData = res.data
+        let sel = document.getElementById("tempSelect2");
+        let messageTypeData = messageData[sel.selectedIndex - 1].ID;
+
+        document.getElementById("IDs").value = messageTypeData;
+      })
+  }
+
+
+  function deleteTypeForm() {
+    axios.get("http://:8081/get_templates")
+      .then((res) => {
+
+        let messageData = res.data
+        let sel = document.getElementById("MessageTypeID3");
+        let messageTypeData = messageData[sel.selectedIndex - 1].ID;
+
+        document.getElementById("IDss").value = messageTypeData;
+      })
+  }
+
+
+
+
+
   ///////////
   //Polling//
   ///////////
 
   setInterval(getData, 5000);
+
+  if(win !== null){
+    setInterval(deleteTypeDropdown, 5000);
+  }
+
+  if(win2 !== null){
+    setInterval(test, 5000);
+    setInterval(grabDataForEditTemplateType, 5000);
+    setInterval(grabDataForEditType, 5000)
+
+    
+  }
+
