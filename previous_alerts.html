@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<link href="admin_stylesheet.css" rel="stylesheet" type="text/css"/>
+		<meta charset="UTF-8"/>
+		<title>Trinity University Campus Alert System</title>
+		<script type="text/javascript" src ='previous_alerts.js'></script>
+
+	</head>
+
+
+	<body>
+
+		<div class="tab">
+			<button class="tablinks" id="defaultOpenManage" onclick="switchTabs(event, 'activeTab')">Active Messages</button>
+			<button class="tablinks" onclick="switchTabs(event, 'inactiveTab')">Inactive Messages</button>
+		</div>
+
+		<div id="activeTab" class="tabcontent">
+
+			<h3 align="center">Active Alerts</h3>
+
+			<div class = "scroll-list" id = "active list">
+				<script>getMessages("active")</script>
+			</div>
+
+			<input  type="submit"
+					class="undelete"
+					id="submit active"
+					value="Delete Selected Messages"
+					onclick="submit('active')"
+					disabled
+			>
+
+			<input  type="submit"
+					class="cancel_undelete"
+					id="cancel undelete"
+					value="Cancel"
+					onclick="closeCurrentWindow()"
+			>
+
+		</div>
+
+		<div id="inactiveTab" class="tabcontent">
+
+			<h3 align="center">Inactive Alerts</h3>
+
+			<div class = "scroll-list" id = "inactive list">
+				<script>getMessages("inactive")</script>
+			</div>
+
+			<input  type="submit"
+					class="undelete"
+					id="submit inactive"
+					value="Re-Activate Selected Messages"
+					onclick="submit('inactive')"
+					disabled
+			>
+
+			<input  type="submit"
+					class="cancel_undelete"
+					id="cancel undelete"
+					value="Cancel"
+					onclick="closeCurrentWindow()"
+			>
+
+		</div>
+
+	</body>
+
+</html>
+
