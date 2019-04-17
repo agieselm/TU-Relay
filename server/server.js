@@ -67,15 +67,10 @@ app.post('/deleted_messages', upload.none(), function(req, res, next) {
     //Access DB and return all messages.
     connection.query("SELECT * FROM message WHERE Deleted = 'T' ORDER BY DateDeleted DESCENDING", function (err, rows, fields) {
         if (err) next(err);
-        for (let row in rows) {
-            connection.query("UPDATE message SET DateDeleted = CURRENT_TIME() WHERE ID = ?", row.ID, function (err, rows, fields) {
-
-            })
-        }
         
-        connection.query()
         res.status(200).json(rows);
     });
+    
 })
 
 app.post('/send_message', upload.single("blob"), function(req, res, next) {
