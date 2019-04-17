@@ -132,3 +132,25 @@ input[type=text], select {
 #imgUpload{
  align-content: center;
 }
+
+.oldMessageButtons{
+
+
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+  
+  padding: 4px 4px;
+  margin: 4px 0;
+  border: none;
+  cursor: pointer;
+}
+
+#oldMessageContainer{
+  /* columns: auto;
+  columns: 2; */
+  
+  border-radius: 4px;
+
+
+}

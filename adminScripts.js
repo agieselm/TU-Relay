@@ -1,6 +1,8 @@
   let reloadpage = false;
   //change color of buttons
   
+//localhost
+
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
   //////////////////////////////////////////////
@@ -96,9 +98,8 @@
       let x = document.getElementById("MessageTypeID");
       let y = document.getElementById("Title");
       let z = document.getElementById("Content");
-      console.log(x)
-      console.log(y)
-      console.log(z)
+
+
       if( x.value  === "no" || y.value === "" || z.value === ""){
         alert("Please enter all fields")
         }else{
@@ -118,9 +119,7 @@
       let x = document.getElementById("MessageTypeID2");
       let y = document.getElementById("alertTitle");
       let z = document.getElementById("alertMessage2");
-      console.log(x)
-      console.log(y)
-      console.log(z)
+
       if( x.value  === "no" || y.value === "" || z.value === "" || w.value === ""){
         alert("Please enter all fields")
         }else{
@@ -138,9 +137,7 @@
       let w = document.getElementById("Color")
       let x = document.getElementById("Priority");
       let y = document.getElementById("Name");
-      console.log(x)
-      console.log(y)
-      console.log(w)
+
       if( x.value  === "no" || y.value === ""  || w.value === ""){
         alert("Please enter all fields")
         }else{
@@ -158,14 +155,13 @@
       let w = document.getElementById("Priority2")
       let x = document.getElementById("MessageTypeIDs");
       let y = document.getElementById("Name2");
-      console.log(x)
-      console.log(y)
-      console.log(w)
+
       if( x.value  === "no" || y.value === ""  || w.value === ""){
         alert("Please enter all fields")
         }else{
       document.getElementById("edittypee").submit()
       document.getElementById("edittypee").reset()
+
 
     }
   }
@@ -181,11 +177,7 @@
       let x = document.getElementById("editTemplates");
       let y = document.getElementById("Titles");
       let z = document.getElementById("Contents");
-      console.log(x)
-      console.log(y)
-      console.log(z)
-      console.log(w)
-      console.log(v)
+
       if( x.value  === "no" || y.value === "" || z.value === "" || w.value === "" || v.value === "no"){
         alert("Please enter all fields")
         }else{
@@ -220,7 +212,7 @@
 
   function getData() {
     const axios = require('axios')
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         const messageData = res.data
@@ -254,7 +246,7 @@
     ////////////////////////////////////
     //Grabbing type data from database//
     ////////////////////////////////////
-    axios.get("http://:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -287,7 +279,7 @@
   /////////////////////////////////////////
 
   function fillFormData() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -308,7 +300,7 @@
   ////////////////////////////////////////
 
   function fillEditType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -318,11 +310,6 @@
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
         let messageTypeID = messageData[sel.selectedIndex - 1].ID
-
-        console.log(messageTitleData)
-        console.log(messageContentData)
-        console.log(messageTypeData)
-        console.log(messageTypeID)
 
         document.getElementById("Color2").value = messageTitleData;
         document.getElementById("Priority2").value = messageContentData;
@@ -339,7 +326,7 @@
   ////////////////////////////////
 
   function fillEditFormData() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -365,7 +352,7 @@
   ////////////////////////////////////////////////
 
   function grabDataForEditTemplateType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -391,7 +378,7 @@
 
 
   function grabDataForEditType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -417,7 +404,7 @@
   function test(){
 
     const axios = require('axios')
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -444,7 +431,7 @@
   }
 
   function deleteTypeDropdown() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -452,9 +439,11 @@
         let x = document.getElementById("MessageTypeID3");
 
         for (let i = 0; i < messageData.length; i++) {
+          //console.log(i)
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.value = messageData[i].ID
+          console.log(option.value)
 
           x.options.add(option)
         }
@@ -468,7 +457,7 @@
   }
 
   function fillFormDatassss() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -481,7 +470,7 @@
 
 
   function deleteTypeForm() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -491,6 +480,59 @@
         document.getElementById("IDss").value = messageTypeData;
       })
   }
+
+
+  // function getOldMessages() {
+  //   axios.post("http://localhost:8081/new_messages")
+  //     .then((res) => {
+
+  //       const messageData = res.data
+  //       console.log(messageData)
+  //       let x = document.getElementById("oldMessageContainer");
+
+  //       for (let i = 0; i < messageData.length; i++) {
+          // var butt=document.createElement("button");
+          // butt.innerHTML += messageData[i].Title;
+          // x.appendChild(butt);
+   
+
+  //         x.innerHTML +=  "<button class ='oldMessageButtons' id = "+i+" onclick = 'getOldMessages()'> "
+  //          + "Title: " + messageData[i].Title + "<br> <br> " +"Date: " + messageData[i].DateSent  
+  //         + "</button>" + "<br>" + "<div id = " +"oldmessageInfoPageStuff" + i + ">"
+  //         + "<label>Date Sent</label> "
+  //         + "<input type='text' id= 'datesent' disabled = 'disabled' value = " + messageData[i].DateSent + ">"
+  //         + "<label>Title</label>"
+  //         + "<input type='text' placeholder='Alert Title' id='oldAlertTitle' name='Title' disabled = 'disabled' value = " +messageData[i].Title  + ">"
+  //         + "<label>Type</label>"
+  //         + "<input type='text'  id = 'oldMessageTypeID' name='MessageTypeID' disabled = 'disabled' value = " +messageData[i].MessageTypeID + ">"
+  //         + "<label>Content</label>"
+  //         + "<input type='text' placeholder='Your alert message'id='oldAlertMessage' name='Content' disabled = 'disabled' value = " +messageData[i].Content + ">" + "</div"
+
+  //         //let wo = event.srcElement.id
+  //         var y = document.getElementById("oldmessageInfoPageStuff" + i);
+  //         if (y.style.display === "none") {
+  //           y.style.display = "block";
+  //         } else {
+  //           y.style.display = "none";
+  //         }
+
+  //       }
+
+  //       const buttons = []
+  //       document.querySelectorAll('#oldMessageContainer > button').forEach((button) => {
+  //         if (buttons.includes(button.id)) button.remove()
+  //         else buttons.push(button.id)
+  //       })
+
+  //     })
+  // }
+
+
+
+
+    //alert(event.srcElement.id);
+    //let wo = event.srcElement.id
+
 
 
 
@@ -504,9 +546,11 @@
   
 
   setInterval(getData, 5000);
+  //setInterval(getOldMessages, 5000)
 
   if(win !== null){
     setInterval(deleteTypeDropdown, 5000);
+
   }
 
   if(win2 !== null){

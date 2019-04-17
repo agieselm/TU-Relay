@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="getData()">
+<body onload="getData();getOldMessages()">
 
   <div class="tab">
     <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id="defaultOpen">New Message</button>
@@ -31,7 +31,7 @@
 
     <label>Type</label>
     <button id="addButton" onclick="popupTypeAdd()">+</button>
-    <form id="sendNewMessage" action="http://:8081/send_message" method="post" enctype="multipart/form-data">
+    <form id="sendNewMessage" action="http://localhost:8081/send_message" method="post" enctype="multipart/form-data">
 
 
       <!-- Drop down for types -->
@@ -61,20 +61,13 @@
   </div>
 
   <div id="oldMessage" class="tabcontent">
-    <div class="vertical-menu">
-      <a href="#" class="active">Home</a>
-      <a href="#">Message 1</a>
-      <a href="#">Message 2</a>
-      <a href="#">Message 3</a>
-      <a href="#">Message 4</a>
-      <a href="#">Message 1</a>
-      <a href="#">Message 2</a>
-      <a href="#">Message 3</a>
-      <a href="#">Message 4</a>
-      <a href="#">Message 1</a>
-      <a href="#">Message 2</a>
-      <a href="#">Message 3</a>
-      <a href="#">Message 4</a>
+    <div class="vertical-menu" id="oldMessageContainer">
+
+
+
+
+
+
     </div>
     <div class="deleted">
       <button class="deleted" onclick="popupDeleted()">Deleted Messages</button>
