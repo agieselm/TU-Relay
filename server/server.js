@@ -64,10 +64,10 @@ app.post('/new_messages', upload.none(), function(req, res, next) {
 })
 
 app.post('/deleted_messages', upload.none(), function(req, res, next) {
-    //Access DB and return all messages.
-    connection.query("SELECT * FROM message WHERE Deleted = 'T' ORDER BY DateDeleted DESCENDING", function (err, rows, fields) {
+    //Access DB and return all deleted messages.
+    connection.query("SELECT * FROM message WHERE Deleted = 'T' ORDER BY DateDeleted", function (err, rows, fields) {
         if (err) next(err);
-        
+
         res.status(200).json(rows);
     });
     
