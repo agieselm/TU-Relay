@@ -106,7 +106,7 @@ app.post('/delete_messages', upload.none(), function(req, res, next) {
     //Change specified messages' delete flag to true and updates DateDeleted
     if (req.body.messages) {
         for (let i = 0; i < req.body.messages.length; i++) {
-            connection.query("UPDATE message SET Deleted = 'T', DateDeleted = CURRENT_TIME() WHERE ID = ?", req.body.messageid, function (err, rows, fields) {
+            connection.query("UPDATE message SET Deleted = 'T', DateDeleted = CURRENT_TIME WHERE ID = ?", req.body.messages[i], function (err, rows, fields) {
                 if (err) next(err);
             });
         }
