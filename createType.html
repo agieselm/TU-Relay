@@ -22,7 +22,6 @@
     <form id="sendNewType" action="http://localhost:8081/make_type" method="post">
       <label>Make new Type</label>
 
-      <input name="Color" placeholder="color" id = "Color">
 
 
       <label>Name</label>
@@ -39,7 +38,7 @@
 
       <div id="container">
         <input type="button" value="Save" onclick="sendTypeConfirm()" id="templateSave">
-        <input type="button" value="Cancel" onclick="cancelConfirm()" id="templateCancel">
+        <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" id="templateCancel">Cancel
       </div>
 
     </form>
@@ -54,7 +53,6 @@
       </select>
 
 
-      <input name="Color" placeholder="color" id="Color2">
       <input id="ID2" name = "ID" type="hidden">
 
       <br>
@@ -73,6 +71,8 @@
 
 
       <input type="button" value="Save" onclick="editTypeConfirm()">
+              <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
     </form>
 
   </div>
@@ -86,9 +86,11 @@
 
 <form id = "deleteTypeID" action = "http://localhost:8081/delete_type" method ="post">
 
-              <input id = "IDss" name = "MessageTypeID" type ="">
+              <input id = "IDss" name = "MessageTypeID" type ="hidden">
 
 <input type="button" value="Delete" onclick= "deleteTypeConfirm()" >
+<button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
 </form>
 
 

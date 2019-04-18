@@ -124,6 +124,8 @@ function prevAlerts () {
         }else{
       document.getElementById("sendNewMessage").submit()
       document.getElementById("sendNewMessage").reset()
+      setTimeout("location.reload(true);", 50);
+
       }
 
     }
@@ -144,6 +146,8 @@ function prevAlerts () {
         }else{
       document.getElementById("sendNewTemplate").submit()
       document.getElementById("sendNewTemplate").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -153,15 +157,16 @@ function prevAlerts () {
   /////////////////////////////////////
   function sendTypeConfirm() {
     if (confirm("are you sure you want to send?")) {
-      let w = document.getElementById("Color")
       let x = document.getElementById("Priority");
       let y = document.getElementById("Name");
 
-      if( x.value  === "no" || y.value === ""  || w.value === ""){
+      if( x.value  === "no" || y.value === "" ){
         alert("Please enter all fields")
         }else{
       document.getElementById("sendNewType").submit()
       document.getElementById("sendNewType").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -180,6 +185,8 @@ function prevAlerts () {
         }else{
       document.getElementById("edittypee").submit()
       document.getElementById("edittypee").reset()
+      setTimeout("location.reload(true);", 50);
+
 
 
     }
@@ -189,6 +196,7 @@ function prevAlerts () {
   //////////////////////////////////////
   //Are you sure for: Editing template//
   //////////////////////////////////////
+
   function editTemplateConfirm() {
     if (confirm("are you sure you want to send?")) {
       let v = document.getElementById("MessageTypeID")
@@ -203,6 +211,9 @@ function prevAlerts () {
       document.getElementById("editTemplates").submit()
       document.getElementById("editTemplates").reset()
       console.log("edittemplate sent")
+
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -214,6 +225,8 @@ function prevAlerts () {
     if (confirm("are you sure you want to send?")) {
       document.getElementById("deleteTemplateID").submit()
       document.getElementById("deleteTemplateID").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 
@@ -221,6 +234,8 @@ function prevAlerts () {
     if (confirm("are you sure you want to send?")) {
       document.getElementById("deleteTypeID").submit()
       document.getElementById("deleteTypeID").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 
@@ -254,11 +269,11 @@ function prevAlerts () {
 
         //window.$ = window.jQuery = require('jquery');
 
-        const options = []
+        const opts = []
 
         document.querySelectorAll('#tempSelect > option').forEach((option) => {
-          if (options.includes(option.value)) option.remove()
-          else options.push(option.value)
+          if (opts.includes(option.value)) option.remove()
+          else opts.push(option.value)
         })
       })
 
@@ -325,12 +340,10 @@ function prevAlerts () {
         let messageData = res.data
         let sel = document.getElementById("MessageTypeIDs");
 
-        let messageTitleData = messageData[sel.selectedIndex - 1].Color;
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
         let messageTypeID = messageData[sel.selectedIndex - 1].ID
 
-        document.getElementById("Color2").value = messageTitleData;
         document.getElementById("Priority2").value = messageContentData;
         document.getElementById("Name2").value = messageTypeData;
         document.getElementById("ID2").value = messageTypeID;

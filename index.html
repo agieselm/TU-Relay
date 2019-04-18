@@ -11,11 +11,12 @@
 
 </head>
 
-<body onload="getData();getOldMessages()">
+<body onload="getData();">
 
   <div class="tab">
     <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id="defaultOpen">New Message</button>
-    <button class="tablinks" onclick="switchTabs(event, 'oldMessage')">Old Messages</button>
+    <button class="deleted" onclick="prevAlerts()">Old Messages</button>
+
   </div>
 
   <div id="newMessage" class="tabcontent">
@@ -52,8 +53,8 @@
           <input id="imgUpload" type="file" name="blob" accept=".jpg, .jpeg, .png, .pdf, .img" >
 
 
-      <input type="button" value="Submit" id="sendAlertButton" onclick="sendConfirm()">
-      <input type="button" value="Reset" id="sendAlertButton" onclick="resetForm()">
+      <input type="button"  value="Submit" id="sendAlertButton" onclick="sendConfirm()">
+      <button value="Reset" class = "cancel" id="sendAlertButton" onclick="resetForm()"> Reset
 
 
 
