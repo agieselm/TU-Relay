@@ -21,7 +21,7 @@
 
 
 
-    <form id="sendNewTemplate" action="http://:8081/make_template" method="post">
+    <form id="sendNewTemplate" action="http://131.194.168.163:8081/make_template" method="post">
       <label>Name<label>
           <input type="text" placeholder="Enter Name" name="Name" id = "Name">
 
@@ -39,7 +39,7 @@
           <input type="text" placeholder="Your alert message" id="alertMessage2" name="Content">
           <div id="container">
             <input type="button" value="Save" onclick="sendTemplateConfirm()" id="templateSave">
-            <input type="button" value="Cancel" onclick="cancelConfirm()" id="templateCancel">
+            <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" id="templateCancel"> Cancel
           </div>
     </form>
 
@@ -49,7 +49,7 @@
   <div id="editTemplate" class="tabcontent">
 
 
-    <form id="editTemplates" action="http://:8081/edit_template" method="post">
+    <form id="editTemplates" action="http://131.194.168.163:8081/edit_template" method="post">
       <select id="tempSelect" onChange="fillEditFormData()">
         <option hidden value = "no">--Select Template--</option>
 
@@ -75,6 +75,8 @@
 
 
           <input type="button" value="Save" onclick="editTemplateConfirm()">
+          <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
 
 
 
@@ -89,13 +91,14 @@
 
 
   </select>
-<form id="deleteTemplateID" action = "http://:8081/delete_template" method ="post">
+<form id="deleteTemplateID" action = "http://131.194.168.163:8081/delete_template" method ="post">
 
 <!--MessageTemplateID
 MessageTypeID-->
-
-          <input id = "IDs" name = "MessageTemplateID" type ="">
+          <input id = "IDs" name = "MessageTemplateID" type ="hidden">
 <input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
+<button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
 </form>
 
 

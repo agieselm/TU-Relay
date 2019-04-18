@@ -20,6 +20,10 @@ function prevAlerts () {
   let reloadpage = false;
   //change color of buttons
   
+//131.194.168.163
+
+//131.194.168.163
+
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
   //////////////////////////////////////////////
@@ -115,14 +119,15 @@ function prevAlerts () {
       let x = document.getElementById("MessageTypeID");
       let y = document.getElementById("Title");
       let z = document.getElementById("Content");
-      console.log(x)
-      console.log(y)
-      console.log(z)
+
+
       if( x.value  === "no" || y.value === "" || z.value === ""){
         alert("Please enter all fields")
         }else{
       document.getElementById("sendNewMessage").submit()
       document.getElementById("sendNewMessage").reset()
+      setTimeout("location.reload(true);", 50);
+
       }
 
     }
@@ -137,14 +142,14 @@ function prevAlerts () {
       let x = document.getElementById("MessageTypeID2");
       let y = document.getElementById("alertTitle");
       let z = document.getElementById("alertMessage2");
-      console.log(x)
-      console.log(y)
-      console.log(z)
+
       if( x.value  === "no" || y.value === "" || z.value === "" || w.value === ""){
         alert("Please enter all fields")
         }else{
       document.getElementById("sendNewTemplate").submit()
       document.getElementById("sendNewTemplate").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -154,17 +159,16 @@ function prevAlerts () {
   /////////////////////////////////////
   function sendTypeConfirm() {
     if (confirm("are you sure you want to send?")) {
-      let w = document.getElementById("Color")
       let x = document.getElementById("Priority");
       let y = document.getElementById("Name");
-      console.log(x)
-      console.log(y)
-      console.log(w)
-      if( x.value  === "no" || y.value === ""  || w.value === ""){
+
+      if( x.value  === "no" || y.value === "" ){
         alert("Please enter all fields")
         }else{
       document.getElementById("sendNewType").submit()
       document.getElementById("sendNewType").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -177,14 +181,15 @@ function prevAlerts () {
       let w = document.getElementById("Priority2")
       let x = document.getElementById("MessageTypeIDs");
       let y = document.getElementById("Name2");
-      console.log(x)
-      console.log(y)
-      console.log(w)
+
       if( x.value  === "no" || y.value === ""  || w.value === ""){
         alert("Please enter all fields")
         }else{
       document.getElementById("edittypee").submit()
       document.getElementById("edittypee").reset()
+      setTimeout("location.reload(true);", 50);
+
+
 
     }
   }
@@ -193,6 +198,7 @@ function prevAlerts () {
   //////////////////////////////////////
   //Are you sure for: Editing template//
   //////////////////////////////////////
+
   function editTemplateConfirm() {
     if (confirm("are you sure you want to send?")) {
       let v = document.getElementById("MessageTypeID")
@@ -200,17 +206,16 @@ function prevAlerts () {
       let x = document.getElementById("editTemplates");
       let y = document.getElementById("Titles");
       let z = document.getElementById("Contents");
-      console.log(x)
-      console.log(y)
-      console.log(z)
-      console.log(w)
-      console.log(v)
+
       if( x.value  === "no" || y.value === "" || z.value === "" || w.value === "" || v.value === "no"){
         alert("Please enter all fields")
         }else{
       document.getElementById("editTemplates").submit()
       document.getElementById("editTemplates").reset()
       console.log("edittemplate sent")
+
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 }
@@ -222,6 +227,8 @@ function prevAlerts () {
     if (confirm("are you sure you want to send?")) {
       document.getElementById("deleteTemplateID").submit()
       document.getElementById("deleteTemplateID").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 
@@ -229,6 +236,8 @@ function prevAlerts () {
     if (confirm("are you sure you want to send?")) {
       document.getElementById("deleteTypeID").submit()
       document.getElementById("deleteTypeID").reset()
+      setTimeout("location.reload(true);", 50);
+
     }
   }
 
@@ -239,7 +248,7 @@ function prevAlerts () {
 
   function getData() {
     const axios = require('axios')
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_templates")
       .then((res) => {
 
         const messageData = res.data
@@ -262,18 +271,18 @@ function prevAlerts () {
 
         //window.$ = window.jQuery = require('jquery');
 
-        const options = []
+        const opts = []
 
         document.querySelectorAll('#tempSelect > option').forEach((option) => {
-          if (options.includes(option.value)) option.remove()
-          else options.push(option.value)
+          if (opts.includes(option.value)) option.remove()
+          else opts.push(option.value)
         })
       })
 
     ////////////////////////////////////
     //Grabbing type data from database//
     ////////////////////////////////////
-    axios.get("http://:8081/get_types")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -306,7 +315,7 @@ function prevAlerts () {
   /////////////////////////////////////////
 
   function fillFormData() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -327,23 +336,16 @@ function prevAlerts () {
   ////////////////////////////////////////
 
   function fillEditType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
         let sel = document.getElementById("MessageTypeIDs");
 
-        let messageTitleData = messageData[sel.selectedIndex - 1].Color;
         let messageContentData = messageData[sel.selectedIndex - 1].Priority;
         let messageTypeData = messageData[sel.selectedIndex - 1].Name;
         let messageTypeID = messageData[sel.selectedIndex - 1].ID
 
-        console.log(messageTitleData)
-        console.log(messageContentData)
-        console.log(messageTypeData)
-        console.log(messageTypeID)
-
-        document.getElementById("Color2").value = messageTitleData;
         document.getElementById("Priority2").value = messageContentData;
         document.getElementById("Name2").value = messageTypeData;
         document.getElementById("ID2").value = messageTypeID;
@@ -358,7 +360,7 @@ function prevAlerts () {
   ////////////////////////////////
 
   function fillEditFormData() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -384,7 +386,7 @@ function prevAlerts () {
   ////////////////////////////////////////////////
 
   function grabDataForEditTemplateType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -410,7 +412,7 @@ function prevAlerts () {
 
 
   function grabDataForEditType() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -436,7 +438,7 @@ function prevAlerts () {
   function test(){
 
     const axios = require('axios')
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -463,7 +465,7 @@ function prevAlerts () {
   }
 
   function deleteTypeDropdown() {
-    axios.get("http://:8081/get_types")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -471,9 +473,11 @@ function prevAlerts () {
         let x = document.getElementById("MessageTypeID3");
 
         for (let i = 0; i < messageData.length; i++) {
+          //console.log(i)
           let option = document.createElement("option");
           option.innerHTML = messageData[i].Name;
           option.value = messageData[i].ID
+          console.log(option.value)
 
           x.options.add(option)
         }
@@ -487,7 +491,7 @@ function prevAlerts () {
   }
 
   function fillFormDatassss() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -500,7 +504,7 @@ function prevAlerts () {
 
 
   function deleteTypeForm() {
-    axios.get("http://:8081/get_templates")
+    axios.get("http://131.194.168.163:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -512,6 +516,59 @@ function prevAlerts () {
   }
 
 
+  // function getOldMessages() {
+  //   axios.post("http://131.194.168.163:8081/new_messages")
+  //     .then((res) => {
+
+  //       const messageData = res.data
+  //       console.log(messageData)
+  //       let x = document.getElementById("oldMessageContainer");
+
+  //       for (let i = 0; i < messageData.length; i++) {
+          // var butt=document.createElement("button");
+          // butt.innerHTML += messageData[i].Title;
+          // x.appendChild(butt);
+   
+
+  //         x.innerHTML +=  "<button class ='oldMessageButtons' id = "+i+" onclick = 'getOldMessages()'> "
+  //          + "Title: " + messageData[i].Title + "<br> <br> " +"Date: " + messageData[i].DateSent  
+  //         + "</button>" + "<br>" + "<div id = " +"oldmessageInfoPageStuff" + i + ">"
+  //         + "<label>Date Sent</label> "
+  //         + "<input type='text' id= 'datesent' disabled = 'disabled' value = " + messageData[i].DateSent + ">"
+  //         + "<label>Title</label>"
+  //         + "<input type='text' placeholder='Alert Title' id='oldAlertTitle' name='Title' disabled = 'disabled' value = " +messageData[i].Title  + ">"
+  //         + "<label>Type</label>"
+  //         + "<input type='text'  id = 'oldMessageTypeID' name='MessageTypeID' disabled = 'disabled' value = " +messageData[i].MessageTypeID + ">"
+  //         + "<label>Content</label>"
+  //         + "<input type='text' placeholder='Your alert message'id='oldAlertMessage' name='Content' disabled = 'disabled' value = " +messageData[i].Content + ">" + "</div"
+
+  //         //let wo = event.srcElement.id
+  //         var y = document.getElementById("oldmessageInfoPageStuff" + i);
+  //         if (y.style.display === "none") {
+  //           y.style.display = "block";
+  //         } else {
+  //           y.style.display = "none";
+  //         }
+
+  //       }
+
+  //       const buttons = []
+  //       document.querySelectorAll('#oldMessageContainer > button').forEach((button) => {
+  //         if (buttons.includes(button.id)) button.remove()
+  //         else buttons.push(button.id)
+  //       })
+
+  //     })
+  // }
+
+
+
+
+    //alert(event.srcElement.id);
+    //let wo = event.srcElement.id
+
+
+
 
 
 
@@ -520,9 +577,11 @@ function prevAlerts () {
   ///////////
 
   setInterval(getData, 5000);
+  //setInterval(getOldMessages, 5000)
 
   if(win !== null){
     setInterval(deleteTypeDropdown, 5000);
+
   }
 
   if(win2 !== null){

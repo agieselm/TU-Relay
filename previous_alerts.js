@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 //const console = electron.remote.getGlobal('console')
 
 
-const host = "http://localhost:8081"
+const host = "http://131.194.168.163:8081"
 
 
 // constructor
@@ -241,13 +241,34 @@ function closeCurrentWindow() {
 
 
 // switch tabs
-function switchTabs(evnt, tab) {
-	document.querySelectorAll("[class=tabcontent]").forEach((t) => {
-		t.style.display = "none"
-	})
-	document.querySelectorAll("[class=tablinks]").forEach((t) => {
-		t.className = t.className.replace(" active", "")
-	})
-	document.getElementById(tab).style.display = "block"
-	evnt.currentTarget.className += " active"
-}
+// function switchTabs(evnt, tab) {
+// 	document.querySelectorAll("[class=tabcontent]").forEach((t) => {
+// 		t.style.display = "none"
+// 	})
+// 	document.querySelectorAll("[class=tablinks]").forEach((t) => {
+// 		t.className = t.className.replace(" active", "")
+// 	})
+// 	document.getElementById(tab).style.display = "block"
+// 	evnt.currentTarget.className += " active"
+// }
+
+  //////////////////////////////////////////////
+  //Controlls the tabs at the top of each page//
+  //////////////////////////////////////////////
+  function switchTabs(evt, tabs) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabs).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  ////////////////////////////////////////////
+  //sets new page be the default open screen//
+  ////////////////////////////////////////////
+  document.getElementById("defaultOpen").click();
