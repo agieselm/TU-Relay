@@ -1,12 +1,21 @@
+const host = "http://localhost:8081"
+
 function prevAlerts () {
 	const BrowserWindow = require('electron').remote.BrowserWindow
 
 	// grab reference to main window
-	// let p = BrowserWindow.fromId(0)
+	let p = BrowserWindow.fromId(0)
 
 	// make this window child of above by adding parent: to ¿constructor?
 	// make modal, "modal: true", must have parent
-	var win = new BrowserWindow({ width: 800, height: 700, show: false, center: true })
+	var win = new BrowserWindow({
+		width: 800,
+		height: 700,
+		show: false,
+		center: true,
+		parent: p,
+		modal: true
+	})
 
 	win.id = 1
 
@@ -20,7 +29,6 @@ function prevAlerts () {
   let reloadpage = false;
   //change color of buttons
   
-//localhost
 
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
@@ -246,7 +254,7 @@ function prevAlerts () {
 
   function getData() {
     const axios = require('axios')
-    axios.get("http://localhost:8081/get_templates")
+    axios.get(host + "/get_templates")
       .then((res) => {
 
         const messageData = res.data
@@ -280,7 +288,7 @@ function prevAlerts () {
     ////////////////////////////////////
     //Grabbing type data from database//
     ////////////////////////////////////
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -313,7 +321,7 @@ function prevAlerts () {
   /////////////////////////////////////////
 
   function fillFormData() {
-    axios.get("http://localhost:8081/get_templates")
+    axios.get(host + "/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -334,7 +342,7 @@ function prevAlerts () {
   ////////////////////////////////////////
 
   function fillEditType() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -358,7 +366,7 @@ function prevAlerts () {
   ////////////////////////////////
 
   function fillEditFormData() {
-    axios.get("http://localhost:8081/get_templates")
+    axios.get(host + "/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -384,7 +392,7 @@ function prevAlerts () {
   ////////////////////////////////////////////////
 
   function grabDataForEditTemplateType() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -410,7 +418,7 @@ function prevAlerts () {
 
 
   function grabDataForEditType() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -436,7 +444,7 @@ function prevAlerts () {
   function test(){
 
     const axios = require('axios')
-    axios.get("http://localhost:8081/get_templates")
+    axios.get(host + "/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -463,7 +471,7 @@ function prevAlerts () {
   }
 
   function deleteTypeDropdown() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -489,7 +497,7 @@ function prevAlerts () {
   }
 
   function fillFormDatassss() {
-    axios.get("http://localhost:8081/get_templates")
+    axios.get(host + "/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -502,7 +510,7 @@ function prevAlerts () {
 
 
   function deleteTypeForm() {
-    axios.get("http://localhost:8081/get_types")
+    axios.get(host + "/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -515,7 +523,7 @@ function prevAlerts () {
 
 
   // function getOldMessages() {
-  //   axios.post("http://localhost:8081/new_messages")
+  //   axios.post(host + "/new_messages")
   //     .then((res) => {
 
   //       const messageData = res.data
