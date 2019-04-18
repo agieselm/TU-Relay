@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 //const console = electron.remote.getGlobal('console')
 
 
-const host = "http://localhost:8081"
+const host = "http://131.194.168.163:8081"
 
 
 // constructor
