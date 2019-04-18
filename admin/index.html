@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload="getData();getOldMessages()">
+<body onload="getData();">
 
   <div class="tab">
     <button class="tablinks" onclick="switchTabs(event, 'newMessage')" id="defaultOpen">New Message</button>
@@ -32,7 +32,7 @@
 
     <label>Type</label>
     <button id="addButton" onclick="popupTypeAdd()">+</button>
-    <form id="sendNewMessage" action="http://131.194.168.163:8081/send_message" method="post" enctype="multipart/form-data">
+    <form id="sendNewMessage" action="http://localhost:8081/send_message" method="post" enctype="multipart/form-data">
 
 
       <!-- Drop down for types -->
@@ -54,7 +54,7 @@
 
 
       <input type="button"  value="Submit" id="sendAlertButton" onclick="sendConfirm()">
-      <button value="Reset" class = "cancel"  onclick="resetForm()"> Reset
+      <button value="Reset" class = "cancel" id="sendAlertButton" onclick="resetForm()"> Reset
 
 
 

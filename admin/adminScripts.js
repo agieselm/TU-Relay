@@ -20,9 +20,7 @@ function prevAlerts () {
   let reloadpage = false;
   //change color of buttons
   
-//131.194.168.163
-
-//131.194.168.163
+//localhost
 
   //////////////////////////////////////////////
   //Controlls the tabs at the top of each page//
@@ -248,7 +246,7 @@ function prevAlerts () {
 
   function getData() {
     const axios = require('axios')
-    axios.get("http://131.194.168.163:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         const messageData = res.data
@@ -282,7 +280,7 @@ function prevAlerts () {
     ////////////////////////////////////
     //Grabbing type data from database//
     ////////////////////////////////////
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -315,7 +313,7 @@ function prevAlerts () {
   /////////////////////////////////////////
 
   function fillFormData() {
-    axios.get("http://131.194.168.163:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -336,7 +334,7 @@ function prevAlerts () {
   ////////////////////////////////////////
 
   function fillEditType() {
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -360,7 +358,7 @@ function prevAlerts () {
   ////////////////////////////////
 
   function fillEditFormData() {
-    axios.get("http://131.194.168.163:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -386,7 +384,7 @@ function prevAlerts () {
   ////////////////////////////////////////////////
 
   function grabDataForEditTemplateType() {
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -412,7 +410,7 @@ function prevAlerts () {
 
 
   function grabDataForEditType() {
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -438,7 +436,7 @@ function prevAlerts () {
   function test(){
 
     const axios = require('axios')
-    axios.get("http://131.194.168.163:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -465,7 +463,7 @@ function prevAlerts () {
   }
 
   function deleteTypeDropdown() {
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         const messageData = res.data
@@ -491,7 +489,7 @@ function prevAlerts () {
   }
 
   function fillFormDatassss() {
-    axios.get("http://131.194.168.163:8081/get_templates")
+    axios.get("http://localhost:8081/get_templates")
       .then((res) => {
 
         let messageData = res.data
@@ -504,7 +502,7 @@ function prevAlerts () {
 
 
   function deleteTypeForm() {
-    axios.get("http://131.194.168.163:8081/get_types")
+    axios.get("http://localhost:8081/get_types")
       .then((res) => {
 
         let messageData = res.data
@@ -517,7 +515,7 @@ function prevAlerts () {
 
 
   // function getOldMessages() {
-  //   axios.post("http://131.194.168.163:8081/new_messages")
+  //   axios.post("http://localhost:8081/new_messages")
   //     .then((res) => {
 
   //       const messageData = res.data
