@@ -32,7 +32,7 @@ app.on('ready', () => {
     // Axios post request for new_messages route on server. Call returns list JSON objects with all messages in server
     axios({
       method: 'post',
-      url: posturl.url, //'http://localhost:8081/new_messages',
+      url:  'http://localhost:8081/new_messages',
       data: JSON.stringify(initialid),
       headers: { 'Content-Type': 'application/json' }
     })
@@ -70,7 +70,7 @@ app.on('ready', () => {
     // Axios post request for new_messages route on server. Call returns list JSON objects with id's greater than the messageid given
     axios({
       method: 'post',
-      url: posturl.url,//'http://localhost:8081/new_messages',
+      url:  'http://localhost:8081/new_messages',
       data: JSON.stringify(obj),
       headers: { 'Content-Type': 'application/json' }
     })

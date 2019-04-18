@@ -2,7 +2,7 @@
 const config = {
     host: "localhost",
     user: "root",
-    password: "Parker1997",
+    password: "bananas",
     database: "TU_Relay"
 }
 
