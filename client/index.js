@@ -1,44 +1,92 @@
 const electron = require('electron')
 const { app, BrowserWindow } = electron
 const axios = require('axios')
-const posturl = require('./notanIP') //remote URL for Ben's Server
-var FormData = require('form-data');
+
+// Remote URL for Ben's Server. IP in gitignore
+const posturl = require('./notanIP')
 
 // Browser Window
-let win = null
+let win;
 
-// List of messages that have already been displayed
-var usedMessageIDs = [3];
+// ID of the last displayed message. Updated after each successful request
+var usedMessageID = 0;
 
+// bool to determine if the id of the newest message in the database has been set
+var initialIDSet = false;
+
+// Boolean value set to true if there is new message content returned form the axios request
+var hasNewMessage = false;
+
+// Event 'ready' emitted when electron has finished initializing.
 app.on('ready', () => {
 
-  //function runs on an interval to check server for a new message  
-  function checkServerForNewMessages() {
-    
-    console.log(usedMessageIDs);
+  //runs function on app start
+  setInitialMessageID();
+  
+  //Function calls server and obtains ID of last message in database. It then runs checkServerForNewMessages()
+  function setInitialMessageID() {
 
-    //formdata to pass id to new_messages route
-    var messageFormData = new FormData();
-    messageFormData.append('messageid', usedMessageIDs[0].toString());
+    //ID object to send to new_messages route. Initial call will always start at 0
+    var initialid = { messageid: usedMessageID }
 
-    var obj = { messageid: usedMessageIDs[0].toString() };
-        
-    //axios http request for new_messages route on server
+    // Axios post request for new_messages route on server. Call returns list JSON objects with all messages in server
     axios({
       method: 'post',
-      url: 'http://localhost:8081/new_messages',
+      url: posturl.url, //'http://localhost:8081/new_messages',
+      data: JSON.stringify(initialid),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    
+    // Successful call sets usedMessageID to the ID of the last message on the server and sets interval to poll server with other function
+    .then(res => {
+      var listOfAllMessages = res.data;
+      console.log(listOfAllMessages);
+      var lastMessageInList = listOfAllMessages.pop();
+      console.log(lastMessageInList);
+      usedMessageID = lastMessageInList.ID
+
+      initialIDSet = true;
+
+      if(initialIDSet = true) {
+        setInterval(checkServerForNewMessages, 5000);
+      } 
+    })
+
+    // Failed server call re-runs this function
+    .catch(err => {
+      console.log("Could not execute initial axios call");
+      console.log(err);
+      setInitialMessageID();
+    })
+}
+   
+  // Function to make server call.
+  // If successful, creates a new instance of browser window and sends data to render process via electron web contents.
+  // Throws errors on http request failure
+  function checkServerForNewMessages() {
+  
+    // js object that passes messageid into axios request as a JSON object
+    var obj = { messageid: usedMessageID };
+        
+    // Axios post request for new_messages route on server. Call returns list JSON objects with id's greater than the messageid given
+    axios({
+      method: 'post',
+      url: posturl.url,//'http://localhost:8081/new_messages',
       data: JSON.stringify(obj),
       headers: { 'Content-Type': 'application/json' }
     })
-      //on success, start new browser window and send data to render process
+
+    // If http request is successful, create new instance of browser window and send message data to render process
       .then(res => {
 
+    // MessageData is a list of JSON objects returned by the server
         var messageData = res.data;
         console.log(messageData);
-        console.log(messageData[0].ID);
-        console.log(messageData[0].Title);
-        console.log(messageData[0].Content);
-        //TODO: need to make the browser window size and position responsive
+
+    // Sets hasNewMessage to true if there is message data
+        if(messageData[0].ID != null) { hasNewMessage = true; }
+
+    // New instance of electron browser window
         win = new BrowserWindow(
           {
             x: 1200,
@@ -47,32 +95,38 @@ app.on('ready', () => {
             height: 228,
             transparent: true,
             frame: false,
+            resizable: false,
           });
-        //loads browser window at specified URL
-        win.loadURL(`file://${__dirname}/messageRed.html`);
 
-        //callback to send message data to browser window
-        //TODO: send correct object to html page
+    // If there is a new message, load message URL and pass web contents to render process
+        if(hasNewMessage = false) {
+           win = null
+        } else {
+
+    // Loads browser window with contents of specified URL
+        win.loadURL(`file://${__dirname}/relayMessage.html`);
+
+    // Callback to send message data to browser window via electron webContents
         win.webContents.on('did-finish-load', () => {
           win.webContents.send('message:sendData', messageData[0])
         })
-        usedMessageIDs.shift();
-        usedMessageIDs.push(messageData[0].ID);
-        console.log(usedMessageIDs);
+
+    // Update ID of last displayed message
+        usedMessageID = messageData[0].ID;
+        hasNewMessage = false;
+        }
       })
-      //on failure, log errors
+
+    // If http request fails, log errors
       .catch(err => {
-        console.log(err);
+        console.log("No new Messages");
+        console.log(usedMessageID);
       });
   }
-  //runs above function on a set interval (ms)
-  setInterval(checkServerForNewMessages, 10000);
 });
-
-
+// Fired when all windows have been closed in electron app
+// This event declaration prevents the electron app from closing if all browser windows close
+// Polling process continues to run in the background process
 app.on('window-all-closed', () => {
 
 });
-
-//sample sql message
-//insert into message (Title, Content, MessageTypeID, UserID) values ("This is the test title, yay", "This is the test content, viola", 1, 12);

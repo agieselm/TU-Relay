@@ -51,6 +51,7 @@ app.get('/', upload.none(), function(req, res, next) {
 app.post('/new_messages', upload.none(), function(req, res, next) {
     //Access DB and check for new messages with id higher than provided id.
     //If no provided id, provide all messages.
+    //TODO: If there are no messages with id higher than provided, don't return anything
     let start = "0";
     if (req.body.messageid) {
         start = req.body.messageid;
