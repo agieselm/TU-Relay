@@ -40,9 +40,8 @@ app.on('ready', () => {
     // Successful call sets usedMessageID to the ID of the last message on the server and sets interval to poll server with other function
     .then(res => {
       var listOfAllMessages = res.data;
-      console.log(listOfAllMessages);
       var lastMessageInList = listOfAllMessages.pop();
-      console.log(lastMessageInList);
+
       usedMessageID = lastMessageInList.ID
 
       initialIDSet = true;
@@ -81,7 +80,6 @@ app.on('ready', () => {
 
     // MessageData is a list of JSON objects returned by the server
         var messageData = res.data;
-        console.log(messageData);
 
     // Sets hasNewMessage to true if there is message data
         if(messageData[0].ID != null) { hasNewMessage = true; }
@@ -120,7 +118,6 @@ app.on('ready', () => {
     // If http request fails, log errors
       .catch(err => {
         console.log("No new Messages");
-        console.log(usedMessageID);
       });
   }
 });
