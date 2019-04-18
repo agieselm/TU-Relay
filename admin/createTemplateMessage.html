@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link href="adminClient.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>Create a new template</title>
+
+</head>
+
+<body onload="getData();grabDataForEditTemplateType();test()">
+  <div class="tab">
+    <button class="tablinks" onclick="switchTabs(event, 'newTemplate')" id="defaultOpen">New Template</button>
+    <button class="tablinks" onclick="switchTabs(event, 'editTemplate')">Edit Template</button>
+    <button class="tablinks" onclick="switchTabs(event, 'deleteTemplate')">Delete Template</button>
+
+  </div>
+
+  <div id="newTemplate" class="tabcontent">
+
+
+
+    <form id="sendNewTemplate" action="http://131.194.168.163:8081/make_template" method="post">
+      <label>Name<label>
+          <input type="text" placeholder="Enter Name" name="Name" id = "Name">
+
+          <label>Title</label>
+          <input type="text" placeholder="Alert Title" id="alertTitle" name="Title">
+
+          <label>Type</label>
+          <select id="MessageTypeID2" name="MessageTypeID">
+            <option hidden value = "no">--Select Type--</option>
+          </select>
+
+
+
+          <label>Content</label>
+          <input type="text" placeholder="Your alert message" id="alertMessage2" name="Content">
+          <div id="container">
+            <input type="button" value="Save" onclick="sendTemplateConfirm()" id="templateSave">
+            <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" id="templateCancel"> Cancel
+          </div>
+    </form>
+
+
+  </div>
+
+  <div id="editTemplate" class="tabcontent">
+
+
+    <form id="editTemplates" action="http://131.194.168.163:8081/edit_template" method="post">
+      <select id="tempSelect" onChange="fillEditFormData()">
+        <option hidden value = "no">--Select Template--</option>
+
+      </select>
+
+      <label>Name<label>
+          <input type="text" placeholder="Enter Name" name="Name" id="Names">
+
+          <label>Title</label>
+          <input type="text" placeholder="Alert Title" id="Titles" name="Title">
+
+          <label>Type</label>
+          <select id="MessageTypeID" name="MessageTypeID">
+            <option hidden value = "no">--Select Type--</option>
+          </select>
+
+
+
+          <label>Content</label>
+          <input type="text" placeholder="Your alert message" id="Contents" name="Content">
+
+          <input id = "ID" name = "ID" type ="hidden">
+
+
+          <input type="button" value="Save" onclick="editTemplateConfirm()">
+          <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
+
+
+
+
+    </form>
+  </div>
+
+  <div id="deleteTemplate" class="tabcontent">
+
+      <select id = "tempSelect2" onChange = "fillFormDatassss()" >
+        <option hidden>--Select Template--</option>
+
+
+  </select>
+<form id="deleteTemplateID" action = "http://131.194.168.163:8081/delete_template" method ="post">
+
+<!--MessageTemplateID
+MessageTypeID-->
+          <input id = "IDs" name = "MessageTemplateID" type ="hidden">
+<input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
+<button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
+</form>
+
+
+
+  </div>
+
+
+</body>
+
+<script src="adminScripts.js"></script>
+
+</html>

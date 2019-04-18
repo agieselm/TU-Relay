@@ -1,0 +1,16 @@
+{
+  "name": "relay",
+  "version": "1.0.0",
+  "description": "Admin Client",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "electron": "^4.0.6",
+    "jquery": "^3.3.1"
+  }
+}

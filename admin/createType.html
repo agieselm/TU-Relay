@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link href="adminClient.css" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <title>Add a new type</title>
+
+</head>
+
+<body onload="grabDataForEditType();deleteTypeDropdown()">
+
+
+  <div class="tab">
+    <button class="tablinks" onclick="switchTabs(event, 'newType')" id="defaultOpen">New Type</button>
+    <button class="tablinks" onclick="switchTabs(event, 'editType')">Edit Type</button>
+    <button class="tablinks" onclick="switchTabs(event, 'deleteType')">Delete Type</button>
+  </div>
+  
+  <div id="newType" class="tabcontent">
+    <form id="sendNewType" action="http://131.194.168.163:8081/make_type" method="post">
+      <label>Make new Type</label>
+
+
+
+      <label>Name</label>
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id ="Name">
+
+      <label>Priority</label>
+      <select class="Priority" name="Priority" id="Priority">
+        <option hidden value = "no">--Select a Priority--</option>
+        <option value=0>1 - Highest </option>
+        <option value=1>2</option>
+        <option value=2>3</option>
+        <option value=3>4 - Lowest</option>
+      </select>
+
+      <div id="container">
+        <input type="button" value="Save" onclick="sendTypeConfirm()" id="templateSave">
+        <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" id="templateCancel">Cancel
+      </div>
+
+    </form>
+
+  </div>
+
+  <div id="editType" class="tabcontent">
+
+    <form id="edittypee" action="http://131.194.168.163:8081/edit_type" method="post">
+      <select id="MessageTypeIDs" name = "MessageTypeID" class="MessageTypeID" onchange="fillEditType()">
+        <option hidden value = "no">--Select Type to Edit--</option>
+      </select>
+
+
+      <input id="ID2" name = "ID" type="hidden">
+
+      <br>
+      <label>Name</label>
+      <input type="text" placeholder="example: Maintenence, Emergency, Basketball, etc." name="Name" class="Name" id="Name2">
+
+      <label>Priority</label>
+      <select class="Priority" name="Priority" id="Priority2">
+        <option hidden>--Select a Priority--</option>
+        <option value=0>1 - Highest </option>
+        <option value=1>2</option>
+        <option value=2>3</option>
+        <option value=3>4 - Lowest</option>
+      </select>
+
+
+
+      <input type="button" value="Save" onclick="editTypeConfirm()">
+              <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
+    </form>
+
+  </div>
+
+  <div id="deleteType" class="tabcontent">
+    
+        <select id ="MessageTypeID3" class ="MessageTypeID" onchange ="deleteTypeForm()">
+            <option hidden>--Select Type to Delete--</option>
+
+    </select>
+
+<form id = "deleteTypeID" action = "http://131.194.168.163:8081/delete_type" method ="post">
+
+              <input id = "IDss" name = "MessageTypeID" type ="hidden">
+
+<input type="button" value="Delete" onclick= "deleteTypeConfirm()" >
+<button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
+
+</form>
+
+
+
+
+  </div>
+
+
+</body>
+<script src="adminScripts.js"></script>
+
+
+</html>
