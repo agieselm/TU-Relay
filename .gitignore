@@ -85,6 +85,10 @@ typings/
 .dynamodb/
 
 # End of https://www.gitignore.io/api/node
+
 databaseConfig.js
+
+# IP for testing
+notanIP.js
 
 tmp/

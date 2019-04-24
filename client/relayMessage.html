@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>TU-Relay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="Message">
+    <div class="Message-icon">
+      <i class="fa fa-bell-o"></i>
+    </div>
+    <div class="Message-body">
+      <p id="messageTitleID"></p>
+      <p id="messageContentID"></p>
+      <img id="messageImageID" src=""></img>
+    </div>
+    <button id="close-btn" onclick="closeCurrentWindow()" class="Message-close js-messageClose"><i
+        class="fa fa-times"></i></button>
+  </div>
+  
+  <script> 
+    //******Script receives message data from electron main process and dynamically changes contents of HTML page******//
+    
+    //.remote is used for electron imports in render processes
+    const remote = require('electron').remote;
+
+    //different background colors for messages
+    const red = '#FF4136';
+    const orange = '#f38a12';
+    const blue = '#2320e9';
+    const green = '#04940b';
+
+    //colorPicker holds a list of colors that will be selected based on messageTypeID
+    colorPicker = [red, orange, blue, green];
+
+    //callback function for render process to receive message data
+    require('electron').ipcRenderer.on('message:sendData', (event, message) => {
+
+      console.log(message);
+
+    //variables from callback function to get title, contents, and typeID from message
+      var messageTitleData = message.Title;
+      var messageContentData = message.Content;
+      var messageTypeIdData = message.MessageTypeID;
+      var messageImageData = message.Image;
+
+    //queries to modify html content & CSS background color for messages
+      document.querySelector("#messageTitleID").innerHTML = messageTitleData;
+      document.querySelector("#messageContentID").innerHTML = messageContentData;
+
+      var messageBody = document.querySelector(".Message");
+
+    //Cases to match messageTypeID to background colors
+      switch( messageTypeIdData ) {
+        //TypeID 1 = Red
+        case messageTypeIdData = 1:
+          messageBody.style.backgroundColor = colorPicker[0];
+          break;
+        //TypeID 2 = Orange
+        case messageTypeIdData = 2:
+          messageBody.style.backgroundColor = colorPicker[1];
+          break;
+        //TypeID 3 = Blue
+        case messageTypeIdData = 3:
+          messageBody.style.backgroundColor = colorPicker[2];
+          break;
+        //TypeID 4 = Green
+        case messageTypeIdData = 4:
+          messageBody.style.backgroundColor = colorPicker[3];
+      }
+
+      //function converts arrayBuffer of image data into base 64
+      function arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = new Uint8Array(buffer);
+        var len = bytes.byteLength;
+        for(var i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+      }
+
+      //renders image into message if there is image data
+      if(messageImageData != null) {
+        document.querySelector("#messageImageID").src = "data:image/jpeg;base64," + arrayBufferToBase64(messageImageData.data);
+      }
+    });
+
+    //function to close browser window when the "x" is clicked in the upper right hand corner
+    function closeCurrentWindow() {
+      var window = remote.getCurrentWindow();
+      window.close();
+    };
+  </script>
+</body>
+
+</html>

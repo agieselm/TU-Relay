@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>TU-Relay</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="Message" id="js-timer">
+    <div class="Message-icon">
+      <i class="fa fa-bell-o"></i>
+    </div>
+    <div class="Message-body">
+      <p>SAFETY ALERT: Major Accident on Campus</p>
+      <p>At approximately [time] today a major accident occurred at [location]. The area is being evacuated and a
+        thorough investigation is being conducted. Please avoid that area until further notice. For more details and
+        timely updates, [information].</p>
+    </div>
+    <button id="close-btn" onclick="closeCurrentWindow()" class="Message-close"><i class="fa fa-times"></i></button>
+  </div>
+
+  <script>
+    const remote = require('electron').remote;
+
+  //sets the amount of time before the notification message will timeout.
+    setTimeout(() => {
+      closeCurrentWindow();
+    },
+      6 * 1000 //this is 6 seconds
+    );
+  
+  //function to close browser window when the "x" is clicked in the upper right hand corner
+    function closeCurrentWindow() {
+      var window = remote.getCurrentWindow();
+      window.close();
+    };
+  </script>
+</body>
+
+</html>
