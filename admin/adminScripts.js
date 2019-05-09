@@ -10,7 +10,7 @@ function prevAlerts () {
 	// make modal, "modal: true", must have parent
 	var win = new BrowserWindow({
 		width: 800,
-		height: 700,
+		height: 800,
 		show: false,
 		center: true,
 		parent: p,
@@ -61,7 +61,7 @@ function prevAlerts () {
     const BrowserWindow = remote.BrowserWindow;
      win = new BrowserWindow({
       width: 700,
-      height: 585,
+      height: 670,
       frame: true
     });
     win.setMenuBarVisibility(true);
@@ -78,7 +78,7 @@ function prevAlerts () {
     const BrowserWindow = remote.BrowserWindow;
      win2 = new BrowserWindow({
       width: 700,
-      height: 450,
+      height: 520,
       frame: true
     });
     win2.setMenuBarVisibility(true);
