@@ -73,6 +73,11 @@ function prevAlerts () {
     });
     win3.setMenuBarVisibility(true);
     win3.loadFile('createTemplateMessage.html');
+
+    win3.on('closed', () => {
+      win2 = null
+      location.reload()
+    })
   }
 
   ///////////////////////////////////////////////////
@@ -123,7 +128,7 @@ function prevAlerts () {
     document.getElementById("Title").value = "";
     document.getElementById("Content").value = "";
     document.getElementById("MessageTypeID").value = "";
-    setTimeout("location.reload(true);", 50);
+    setTimeout("location.reload(true);", 100);
 
   }
 
