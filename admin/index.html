@@ -25,7 +25,7 @@
     <label>Template</label>
     <button onclick="popupTemplateAdd()" id="addButton"> + </button>
     <!-- Drop down for template-->
-    <select name="tempSelect" id="tempSelect" onChange="fillFormData()">
+    <select name="tempSelect" id="tempSelect" onChange="fillFormFromDropdown('tempSelect')">
       <option hidden>--Select Template--</option>
 
     </select>
@@ -40,20 +40,20 @@
         <option hidden value = "no">--Select Type--</option>
       </select>
       <label>Title</label>
-      <input id="Title" type="text" name="Title" placeholder="Alert Title" required= "required">
+      <input id="Title" type="text" name="Title" placeholder="Alert Title">
 
       <!-- add type button-->
 
 
       <!-- Message textbox -->
       <label>Content</label>
-      <input type="text" placeholder="Your alert message" id="Content" name="Content" required = "required">
+      <input type="text" placeholder="Your alert message" id="Content" name="Content" >
  
         <label> Upload an Image </input><br>
           <input id="imgUpload" type="file" name="blob" accept=".jpg, .jpeg, .png, .pdf, .img" >
 
 
-      <input type="button"  value="Submit" id="sendAlertButton" onclick="sendConfirm()">
+      <input type="button"  value="Submit" id="sendAlertButton" onclick="sendConfirm()" >
       <button value="Reset" class = "cancel" id="sendAlertButton" onclick="resetForm()"> Reset
 
 
@@ -83,7 +83,7 @@
 
 
 
-<script>
+<script src = "main.js">
   
 </script>
 
