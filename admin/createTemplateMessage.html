@@ -9,7 +9,7 @@
 
 </head>
 
-<body onload="getData();grabDataForEditTemplateType();test()">
+<body onload="fillTypeDropdown('MessageTypeID2');fillTypeDropdown('MessageTypeID');fillTemplateDropdown('tempSelect');fillTemplateDropdown('tempSelect2')">
   <div class="tab">
     <button class="tablinks" onclick="switchTabs(event, 'newTemplate')" id="defaultOpen">New Template</button>
     <button class="tablinks" onclick="switchTabs(event, 'editTemplate')">Edit Template</button>
@@ -50,7 +50,7 @@
 
 
     <form id="editTemplates" action="http://localhost:8081/edit_template" method="post">
-      <select id="tempSelect" onChange="fillEditFormData()">
+      <select id="tempSelect" onChange="fillFormFromDropdown('tempSelect')">
         <option hidden value = "no">--Select Template--</option>
 
       </select>
@@ -59,7 +59,7 @@
           <input type="text" placeholder="Enter Name" name="Name" id="Names">
 
           <label>Title</label>
-          <input type="text" placeholder="Alert Title" id="Titles" name="Title">
+          <input type="text" placeholder="Alert Title" id="Title" name="Title">
 
           <label>Type</label>
           <select id="MessageTypeID" name="MessageTypeID">
@@ -69,7 +69,7 @@
 
 
           <label>Content</label>
-          <input type="text" placeholder="Your alert message" id="Contents" name="Content">
+          <input type="text" placeholder="Your alert message" id="Content" name="Content">
 
           <input id = "ID" name = "ID" type ="hidden">
 
@@ -86,7 +86,7 @@
 
   <div id="deleteTemplate" class="tabcontent">
 
-      <select id = "tempSelect2" onChange = "fillFormDatassss()" >
+      <select id = "tempSelect2" onChange = "deleteTemplateForm()" >
         <option hidden>--Select Template--</option>
 
 
@@ -95,8 +95,8 @@
 
 <!--MessageTemplateID
 MessageTypeID-->
-          <input id = "IDs" name = "MessageTemplateID" type ="hidden">
-<input type="button" value="Delete" onclick= "deleteTemplateConfirm()" >
+          <input id = "deleteSavedTemplate" name = "MessageTemplateID" type ="">
+<input type="button" value="Delete" onclick= "deleteConfirm('deleteTemplateID')" >
 <button type="button" class = "cancel" value="Cancel" onclick="cancelConfirm()" >Cancel
 
 </form>
@@ -109,5 +109,8 @@ MessageTypeID-->
 </body>
 
 <script src="adminScripts.js"></script>
+<script src = "main.js">
+  
+</script>
 
 </html>
