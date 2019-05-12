@@ -40,7 +40,7 @@ Afterwards, the user can edit the information and submit.
 - This list shows the previous messages that are inactive.
 - If the user would like to activate one or more messages, the user can click the box with each corresponding message, and choose ‘Re-Activate Selected Messages’. 
 
-## Admin Installationand navigate to the MySQL Server 
+## Admin Installation
 
 Within the admin folder, there is another folder called release-builds.
 
