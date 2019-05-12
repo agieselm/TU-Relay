@@ -1,7 +1,7 @@
 # TU-Relay
 Message broadcast system for Trinity University
 
-# Quick Start Guide
+## Quick Start Guide
 
 ## Send a New Message
 1. Choose a type.
@@ -16,31 +16,31 @@ Message broadcast system for Trinity University
 3. Click submit. 
 4. Click OK to send.
 
-# New Message Information
+## New Message Information
 - **(Optional) Templates**: Selecting a template from the drop-down menu will auto-fill the message information. This information can be edited in the form before the user submits the message. 
 - **Type**: Select a message type. Types are linked to a priority.
 - **Title**: Choose a title for the message.
 - **Content**: This is the message content itself. 
 - **(Optional) Image**: If the user would like to add an image to the message they are sending, one can be uploaded from the computer. 
 
-# Templates
+## Templates
 - Select from the template drop-down to auto-fill the type, title, and content based on the message template. 
 Afterwards, the user can edit the information and submit. 
 - The plus button on the right allows for the user to add a new template to the drop down list, or edit/delete an existing template.
 
-# Types
+## Types
 - Select from the type drop-down to choose a type for the new message. Each type is linked to a priority.
 - The plus button on the right allows for the user to add a new type to the drop down list or edit/delete an existing type.
 
-# Old messages
-## Active Messages
+## Old messages
+### Active Messages
 - This list shows the previous messages that are still active.
 - If the user would like to deactivate one or more messages, the user can click the box with each corresponding message, and choose ‘Delete Selected Messages’. 
-## Inactive Messages
+### Inactive Messages
 - This list shows the previous messages that are inactive.
 - If the user would like to activate one or more messages, the user can click the box with each corresponding message, and choose ‘Re-Activate Selected Messages’. 
 
-# Admin Installation
+## Admin Installation
 
 Within the admin folder, there is another folder called release-builds.
 
