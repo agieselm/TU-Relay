@@ -45,9 +45,9 @@ If the user would like to activate one or more messages, the user can click the 
 Within the admin folder, there is another folder called release-builds.
 
 In this folder are three more zip folders, one for each operating system:
-⋅⋅* Mac: TU-Relay-darwin-x64
-⋅⋅* Windows: TU-Relay-win32-x64
-⋅⋅* Linux: TU-Relay-linux-x64
+- Mac: TU-Relay-darwin-x64
+- Windows: TU-Relay-win32-x64
+- Linux: TU-Relay-linux-x64
 
 Each of these folders contains the application for the corresponding operating system. 
 After copying the zip file to your computer, you can unzip the folder, where the executable application will be. 
